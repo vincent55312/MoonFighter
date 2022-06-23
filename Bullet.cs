@@ -15,22 +15,36 @@ public class Bullet
 
     void addPrefixedSizes()
     {
-        prefixedSizes.Add(new SizeElement(40, 80));
+        prefixedSizes.Add(new SizeElement(20, 40));
         prefixedSizes.Add(new SizeElement(50, 100));
         prefixedSizes.Add(new SizeElement(60, 120));
         prefixedSizes.Add(new SizeElement(75, 150));
         prefixedSizes.Add(new SizeElement(80, 165));
         prefixedSizes.Add(new SizeElement(90, 180));
+        prefixedSizes.Add(new SizeElement(42, 84));
+        prefixedSizes.Add(new SizeElement(52, 104));
+        prefixedSizes.Add(new SizeElement(62, 124));
+        prefixedSizes.Add(new SizeElement(77, 144));
+        prefixedSizes.Add(new SizeElement(84, 165));
+        prefixedSizes.Add(new SizeElement(86, 180));
+        prefixedSizes.Add(new SizeElement(40, 80));
+        prefixedSizes.Add(new SizeElement(49, 101));
+        prefixedSizes.Add(new SizeElement(60, 124));
+        prefixedSizes.Add(new SizeElement(75, 155));
+        prefixedSizes.Add(new SizeElement(80, 165));
+        prefixedSizes.Add(new SizeElement(90, 180));
         prefixedSizes.Add(new SizeElement(180, 360));
+        prefixedSizes.Add(new SizeElement(360, 720));
+
     }
 
     public Bullet(int speed, Map map, SizeElement sizeElement, Texture2D texture, bool randomizeSize = false)
     {
+        Random rnd = new Random();
 
-        this.speed = speed;
+        this.speed = rnd.Next(1, speed);
         this.texture = texture;
         this.map = map;
-        Random rnd = new Random();
         int randomYposition = rnd.Next(0, this.map.yPixel);
 
         if (randomizeSize)
@@ -44,4 +58,11 @@ public class Bullet
             this.element = new Rectangle(randomYposition, 0 - sizeElement.sizeY, sizeElement.sizeX, sizeElement.sizeY);
         }
     }
+
+    public int getSpeed()
+    {
+        Random rnd = new Random();
+        return rnd.Next(0, speed);
+    }
+     
 }

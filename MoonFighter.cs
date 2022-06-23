@@ -76,7 +76,7 @@ public class MoonFighter : Game
             idBullet++;
         }
 
-        if (rnd.Next(0, 1000) < 2 + boostGeneration)
+        if (rnd.Next(0, 1000) < 1 + boostGeneration)
         {
             instancesBullet.Add(idBullet, new Bullet(1 + boostSpeedBullets*3, map, new SizeElement(120, 100), Content.Load<Texture2D>("alien")));
             idBullet++;
