@@ -172,7 +172,15 @@ public class Game1 : Game
                 }
 
                 Score score = new Score(GraphicsDevice, lossLife, idBullet);
-                _spriteBatch.Draw(score.texture, score.element, score.color);
+
+                if (score.percentScoreLeft <= 0)
+                {
+                    _gameState = GameState.MainMenu;
+                }
+
+
+                _spriteBatch.Draw(score.textureLossLife, score.elementLossLife, score.color);
+                _spriteBatch.Draw(score.textureScore, score.elementScore, Color.White * 0.9f);
 
                 foreach (int instanceExpired in instancesBulletExpired)
                 {
