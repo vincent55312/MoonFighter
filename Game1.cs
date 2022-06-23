@@ -2,6 +2,8 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
+using System.Diagnostics;
+
 public class Game1 : Game
 {
     private GraphicsDeviceManager _graphics;
@@ -21,13 +23,11 @@ public class Game1 : Game
     protected override void Initialize()
     {
         _gameState = GameState.OnMenu;
-        _map = new Map(1200, 720, 1, 1);
+        _map = new Map(1200, 720, 4);
         speed = 10;
-        cube = new Rectangle(0, 0, 30, 30);
-
+        cube = new Rectangle(10, 720 - 80, 30, 80);
         pixel = new Texture2D(GraphicsDevice, 1, 1);
         pixel.SetData<Color>(new Color[] { Color.White });
-
         _graphics.PreferredBackBufferWidth = _map.yPixel;
         _graphics.PreferredBackBufferHeight = _map.xPixel;
         _graphics.ApplyChanges();
@@ -48,13 +48,12 @@ public class Game1 : Game
         }
         else
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.Z))
+            if (Keyboard.GetState().IsKeyDown(Keys.Space))
             {
-                if (cube.Y < 0)
+                if ((cube.Y - 20) < 0 == false)
                 {
-                    cube.Y += _map.yPixel;
+                    cube.Y -= 20;
                 }
-                cube.Y -= speed;
             }
             else if (Keyboard.GetState().IsKeyDown(Keys.Q))
             {
@@ -74,25 +73,22 @@ public class Game1 : Game
             }
             else if (Keyboard.GetState().IsKeyDown(Keys.S))
             {
-                if(cube.Y > _map.xPixel)
+                if ((cube.Y + cube.Height + speed) > _map.xPixel == false)
                 {
-                    cube.Y -= _map.yPixel;
+                    cube.Y += speed;
                 }
-                cube.Y += speed;
             }
 
+
+            if ((cube.Y + cube.Height + _map.gravity) > _map.xPixel == false) { 
+
+                cube.Y += _map.gravity;
+            }
+            Debug.WriteLine(cube);
             base.Update(gameTime);
         }
     }
 
-    private int xCheck(Rectangle rectangle)
-    {
-        if (rectangle.X < 0)
-        {
-            return _map.xPixel;
-        }
-        return rectangle.X;
-    }
 
     protected override void Draw(GameTime gameTime)
     {
