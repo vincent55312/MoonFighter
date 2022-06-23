@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
 
@@ -16,7 +17,7 @@ public class MoonFighter : Game
     private int lossLife { get; set; } = 0;
     private int boostSpeedBullets { get; set; } = 0;
     private int boostGeneration { get; set; } = 0;
-    private int numberUpdated { get; set; } = 0;
+    private int nFrameUpdated { get; set; } = 0;
 
     private GameState _gameState { get; set; } = GameState.Game;
 
@@ -41,20 +42,22 @@ public class MoonFighter : Game
     protected override void LoadContent()
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
+        MediaPlayer.Play(Content.Load<Song>("music"));
+        MediaPlayer.IsRepeating = true;
     }
 
     protected override void Update(GameTime gameTime)
     {
-        numberUpdated++;
-        if (numberUpdated % 300 == 0)
+        nFrameUpdated++;
+        if (nFrameUpdated % 300 == 0)
         {
             boostSpeedBullets++;
         }
-        if (numberUpdated % 120 == 0)
+        if (nFrameUpdated % 120 == 0)
         {
             boostGeneration++;
         }
-        if (numberUpdated % 600 == 0)
+        if (nFrameUpdated % 600 == 0)
         {
             fighter.speed++;
         }

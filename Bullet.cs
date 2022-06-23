@@ -11,7 +11,6 @@ public class Bullet
     public Map map { get; set; }
     public int sizeX { get; set; }
     public int sizeY { get; set; }
-    public int ratioFrequencyGeneration { get; set; }
     public List<SizeElement> prefixedSizes { get; set; } = new List<SizeElement>();
 
     void addPrefixedSizes()
