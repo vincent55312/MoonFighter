@@ -6,16 +6,16 @@ using System.Diagnostics;
 
 public class Score
 {
-    public Texture2D textureLossLife;
-    public Rectangle elementLossLife;
-    public float lossLifePercent;
-    public int score;
-    public Color color;
-    public int nRockets;
-    public float percentScoreLeft;
+    public Texture2D textureLossLife { get; set; }
+    public Rectangle elementLossLife { get; set; }
+    public float lossLifePercent { get; set; }
+    public int score { get; set; }
+    public Color color { get; set; }
+    public int nRockets { get; set; }
+    public float percentScoreLeft { get; set; }
 
-    public Texture2D textureScore;
-    public Rectangle elementScore;
+    public Texture2D textureScore { get; set; }
+    public Rectangle elementScore { get; set; }
 
     public Score(GraphicsDevice graphicsDevice, int lossLife, int nRockets)
     {   

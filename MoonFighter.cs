@@ -3,27 +3,24 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 
-public class Game1 : Game
+public class MoonFighter : Game
 {
-    private GraphicsDeviceManager _graphics;
-    private SpriteBatch _spriteBatch;
-    Random rnd;
+    private GraphicsDeviceManager _graphics { get; set; }
+    private SpriteBatch _spriteBatch { get; set; }
 
-    private Map map;
-    private Fighter fighter;
-    private Dictionary<int, Bullet> instancesBullet = new Dictionary<int, Bullet>();
-    private int idBullet = 0;
-    private int lossLife = 0;
-    private int boostedSpeedBullets = 0;
-    private int boostedGeneration = 0;
-    private int numberUpdated = 0;
+    private Map map { get; set; }
+    private Fighter fighter { get; set; }
+    private Dictionary<int, Bullet> instancesBullet { get; set; } = new Dictionary<int, Bullet>();
+    private int idBullet { get; set; } = 0;
+    private int lossLife { get; set; } = 0;
+    private int boostSpeedBullets { get; set; } = 0;
+    private int boostGeneration { get; set; } = 0;
+    private int numberUpdated { get; set; } = 0;
 
-    //Choix de l'état lors du démarrage de l'application
-    private GameState _gameState = GameState.Game;
+    private GameState _gameState { get; set; } = GameState.Game;
 
-    public Game1()
+    public MoonFighter()
     {
         _graphics = new GraphicsDeviceManager(this);
         Content.RootDirectory = "Content";
@@ -33,7 +30,7 @@ public class Game1 : Game
     protected override void Initialize()
     {
         map = new Map(1200, 720, 1, Content.Load<Texture2D>("background"));
-        fighter = new Fighter(8, 12, new Rectangle(10, 720 - 150, 125, 75), Content.Load<Texture2D>("fighter"));
+        fighter = new Fighter(8, 12, new Rectangle(map.yPixel/2, map.xPixel/2, 125, 75), Content.Load<Texture2D>("fighter"));
 
         _graphics.PreferredBackBufferWidth = map.yPixel;
         _graphics.PreferredBackBufferHeight = map.xPixel;
@@ -51,34 +48,34 @@ public class Game1 : Game
         numberUpdated++;
         if (numberUpdated % 300 == 0)
         {
-            boostedSpeedBullets++;
+            boostSpeedBullets++;
         }
         if (numberUpdated % 120 == 0)
         {
-            boostedGeneration++;
+            boostGeneration++;
         }
-        if (numberUpdated % 3000 == 0)
+        if (numberUpdated % 600 == 0)
         {
             fighter.speed++;
         }
 
 
-        rnd = new Random();
-        if (rnd.Next(0, 1000) < 10 + boostedGeneration)
+        Random rnd = new Random();
+        if (rnd.Next(0, 1000) < 10 + boostGeneration)
         {
-            instancesBullet.Add(idBullet, new Bullet(1 + boostedSpeedBullets, map, new SizeElement(30, 80), Content.Load<Texture2D>("meteor"), true));
+            instancesBullet.Add(idBullet, new Bullet(1 + boostSpeedBullets, map, new SizeElement(30, 80), Content.Load<Texture2D>("meteor"), true));
             idBullet++;
         }
 
-        if (rnd.Next(0, 1000) < 5 + boostedGeneration)
+        if (rnd.Next(0, 1000) < 5 + boostGeneration)
         {
-            instancesBullet.Add(idBullet, new Bullet(1 + boostedSpeedBullets*2, map, new SizeElement(30, 80), Content.Load<Texture2D>("rocket")));
+            instancesBullet.Add(idBullet, new Bullet(1 + boostSpeedBullets*2, map, new SizeElement(30, 80), Content.Load<Texture2D>("rocket")));
             idBullet++;
         }
 
-        if (rnd.Next(0, 1000) < 2 + boostedGeneration)
+        if (rnd.Next(0, 1000) < 2 + boostGeneration)
         {
-            instancesBullet.Add(idBullet, new Bullet(1 + boostedSpeedBullets*3, map, new SizeElement(120, 100), Content.Load<Texture2D>("alien")));
+            instancesBullet.Add(idBullet, new Bullet(1 + boostSpeedBullets*3, map, new SizeElement(120, 100), Content.Load<Texture2D>("alien")));
             idBullet++;
         }
 
@@ -193,7 +190,6 @@ public class Game1 : Game
                 break;
         }
 
-        
         base.Draw(gameTime);
     }
 }

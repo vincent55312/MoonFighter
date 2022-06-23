@@ -4,8 +4,8 @@ using Microsoft.Xna.Framework.Input;
 
 public class GraphicElement
 {
-    public Texture2D texture;
-    public Rectangle element;
+    public Texture2D texture { get; set; }
+    public Rectangle element { get; set; }
 
     public GraphicElement(Rectangle element, Texture2D texture)
     {

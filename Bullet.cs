@@ -5,14 +5,14 @@ using System.Collections.Generic;
 
 public class Bullet
 {
-    public Texture2D texture;
-    public int speed;
+    public Texture2D texture { get; set; }
+    public int speed { get; set; }
     public Rectangle element;
-    public Map map;
-    public int sizeX;
-    public int sizeY;
-    public int ratioFrequencyGeneration;
-    public List<SizeElement> prefixedSizes = new List<SizeElement>();
+    public Map map { get; set; }
+    public int sizeX { get; set; }
+    public int sizeY { get; set; }
+    public int ratioFrequencyGeneration { get; set; }
+    public List<SizeElement> prefixedSizes { get; set; } = new List<SizeElement>();
 
     void addPrefixedSizes()
     {
@@ -38,11 +38,11 @@ public class Bullet
         {
             addPrefixedSizes();
             SizeElement sizeSelected = prefixedSizes[rnd.Next(0, prefixedSizes.Count)];
-            element = new Rectangle(randomYposition, 0 - sizeSelected.sizeY, sizeSelected.sizeX, sizeSelected.sizeY);
+            this.element = new Rectangle(randomYposition, 0 - sizeSelected.sizeY, sizeSelected.sizeX, sizeSelected.sizeY);
 
         } else
         {
-            element = new Rectangle(randomYposition, 0 - sizeElement.sizeY, sizeElement.sizeX, sizeElement.sizeY);
+            this.element = new Rectangle(randomYposition, 0 - sizeElement.sizeY, sizeElement.sizeX, sizeElement.sizeY);
         }
     }
 }

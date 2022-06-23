@@ -4,9 +4,9 @@ using Microsoft.Xna.Framework.Input;
 
 public class Fighter
 {
-    public Texture2D texture;
-    public int speed;
-    public int jump;
+    public Texture2D texture { get; set; }
+    public int speed { get; set; }
+    public int jump { get; set; }
 
     public Rectangle element;
 

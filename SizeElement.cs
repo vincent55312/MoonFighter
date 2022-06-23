@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 public class SizeElement
 {
-    public int sizeX;
-    public int sizeY;
+    public int sizeX { get; set; }
+    public int sizeY { get; set; }
 
     public SizeElement(int sizeX, int sizeY)
     {
