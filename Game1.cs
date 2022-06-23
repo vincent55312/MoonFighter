@@ -139,8 +139,6 @@ public class Game1 : Game
 
     protected override void Draw(GameTime gameTime)
     {
-        GraphicsDevice.Clear(Color.Black);
-
         switch (_gameState)
         {
             case GameState.MainMenu:
