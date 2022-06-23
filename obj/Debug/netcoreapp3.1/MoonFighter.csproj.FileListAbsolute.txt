@@ -22,4 +22,8 @@ C:\Users\vincentv\Desktop\Cours\Dev\MoonFighter\obj\Debug\netcoreapp3.1\MoonFigh
 C:\Users\vincentv\Desktop\Cours\Dev\MoonFighter\obj\Debug\netcoreapp3.1\MoonFighter.dll
 C:\Users\vincentv\Desktop\Cours\Dev\MoonFighter\obj\Debug\netcoreapp3.1\MoonFighter.pdb
 C:\Users\vincentv\Desktop\Cours\Dev\MoonFighter\obj\Debug\netcoreapp3.1\MoonFighter.genruntimeconfig.cache
-C:\Users\vincentv\Desktop\Cours\Dev\MoonFighter\bin\Debug\netcoreapp3.1\Content\profil.xnb
+C:\Users\vincentv\Desktop\Cours\Dev\MoonFighter\bin\Debug\netcoreapp3.1\Content\background.xnb
+C:\Users\vincentv\Desktop\Cours\Dev\MoonFighter\bin\Debug\netcoreapp3.1\Content\fighter.xnb
+C:\Users\vincentv\Desktop\Cours\Dev\MoonFighter\bin\Debug\netcoreapp3.1\Content\meteor.xnb
+C:\Users\vincentv\Desktop\Cours\Dev\MoonFighter\bin\Debug\netcoreapp3.1\Content\rocket.xnb
+C:\Users\vincentv\Desktop\Cours\Dev\MoonFighter\bin\Debug\netcoreapp3.1\Content\alien.xnb

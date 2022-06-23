@@ -1,5 +1,0 @@
-﻿enum GameState
-{
-    OnMenu,
-    OnPlaying
-}
