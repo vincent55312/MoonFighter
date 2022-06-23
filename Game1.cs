@@ -16,6 +16,9 @@ public class Game1 : Game
     private Dictionary<int, Bullet> instancesBullet = new Dictionary<int, Bullet>();
     private int idBullet = 0;
     private int lossLife = 0;
+    private int boostedSpeedBullets = 0;
+    private int boostedGeneration = 0;
+    private int numberUpdated = 0;
 
     //Choix de l'état lors du démarrage de l'application
     private GameState _gameState = GameState.Game;
@@ -44,23 +47,38 @@ public class Game1 : Game
     }
 
     protected override void Update(GameTime gameTime)
-    {    
+    {
+        numberUpdated++;
+        if (numberUpdated % 300 == 0)
+        {
+            boostedSpeedBullets++;
+        }
+        if (numberUpdated % 120 == 0)
+        {
+            boostedGeneration++;
+        }
+        if (numberUpdated % 3000 == 0)
+        {
+            fighter.speed++;
+        }
+
+
         rnd = new Random();
-        if (rnd.Next(0, 1000) < 10)
+        if (rnd.Next(0, 1000) < 10 + boostedGeneration)
         {
-            instancesBullet.Add(idBullet, new Bullet(2, map, new SizeElement(30, 80), Content.Load<Texture2D>("meteor"), true));
+            instancesBullet.Add(idBullet, new Bullet(1 + boostedSpeedBullets, map, new SizeElement(30, 80), Content.Load<Texture2D>("meteor"), true));
             idBullet++;
         }
 
-        if (rnd.Next(0, 1000) < 5)
+        if (rnd.Next(0, 1000) < 5 + boostedGeneration)
         {
-            instancesBullet.Add(idBullet, new Bullet(5, map, new SizeElement(30, 80), Content.Load<Texture2D>("rocket")));
+            instancesBullet.Add(idBullet, new Bullet(1 + boostedSpeedBullets*2, map, new SizeElement(30, 80), Content.Load<Texture2D>("rocket")));
             idBullet++;
         }
 
-        if (rnd.Next(0, 1000) < 2)
+        if (rnd.Next(0, 1000) < 2 + boostedGeneration)
         {
-            instancesBullet.Add(idBullet, new Bullet(7, map, new SizeElement(120, 100), Content.Load<Texture2D>("alien")));
+            instancesBullet.Add(idBullet, new Bullet(1 + boostedSpeedBullets*3, map, new SizeElement(120, 100), Content.Load<Texture2D>("alien")));
             idBullet++;
         }
 
