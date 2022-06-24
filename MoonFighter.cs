@@ -61,6 +61,11 @@ public class MoonFighter : Game
         {
             fighter.speed++;
         }
+        if (nFrameUpdated % 500 == 0)
+        {
+            instancesBullet.Add(idBullet, new Bullet(2 + boostSpeedBullets, map, new SizeElement(600, 500), Content.Load<Texture2D>("doge"), false, false));
+            idBullet++;
+        }
 
 
         Random rnd = new Random();
@@ -85,7 +90,13 @@ public class MoonFighter : Game
 
         foreach (Bullet instance in instancesBullet.Values)
         {
-            instance.element.Y += instance.speed;
+            if (instance.mouvementIsVertial)
+            {
+                instance.element.Y += instance.speed;
+            } else
+            {
+                instance.element.X += instance.speed;
+            }
         }
 
         if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
@@ -163,7 +174,7 @@ public class MoonFighter : Game
                         lossLife++;
                     }
 
-                    if (instance.Value.element.Y > map.xPixel)
+                    if (instance.Value.element.Y > map.xPixel || instance.Value.sizeX > map.yPixel)
                     {
                         instancesBulletExpired.Add(instance.Key);
                     }

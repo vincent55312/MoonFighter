@@ -1,2 +1,2 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"C:/Users/vincentv/Desktop/Cours/Dev/MoonFighter/Content/music.mp3","C:/Users/vincentv/Desktop/Cours/Dev/MoonFighter/Content/bin/music.xnb","SongProcessor","SongContent",4939067,123,5,190277
+"C:/Users/vincentv/Desktop/Cours/Dev/MoonFighter/Content/doge.png","C:/Users/vincentv/Desktop/Cours/Dev/MoonFighter/Content/bin/doge.xnb","TextureProcessor","Texture2DContent",84256,1000085,0,375164

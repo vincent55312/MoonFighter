@@ -29,3 +29,4 @@ C:\Users\vincentv\Desktop\Cours\Dev\MoonFighter\bin\Debug\netcoreapp3.1\Content\
 C:\Users\vincentv\Desktop\Cours\Dev\MoonFighter\bin\Debug\netcoreapp3.1\Content\alien.xnb
 C:\Users\vincentv\Desktop\Cours\Dev\MoonFighter\bin\Debug\netcoreapp3.1\Content\music.ogg
 C:\Users\vincentv\Desktop\Cours\Dev\MoonFighter\bin\Debug\netcoreapp3.1\Content\music.xnb
+C:\Users\vincentv\Desktop\Cours\Dev\MoonFighter\bin\Debug\netcoreapp3.1\Content\doge.xnb

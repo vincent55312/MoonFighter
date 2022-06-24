@@ -12,6 +12,7 @@ public class Bullet
     public int sizeX { get; set; }
     public int sizeY { get; set; }
     public List<SizeElement> prefixedSizes { get; set; } = new List<SizeElement>();
+    public bool mouvementIsVertial { get; set; }
 
     void addPrefixedSizes()
     {
@@ -38,24 +39,35 @@ public class Bullet
 
     }
 
-    public Bullet(int speed, Map map, SizeElement sizeElement, Texture2D texture, bool randomizeSize = false)
+    public Bullet(int speed, Map map, SizeElement sizeElement, Texture2D texture, bool randomizeSize = false, bool mouvementIsVertial = true)
     {
         Random rnd = new Random();
 
         this.speed = rnd.Next(1, speed);
+        this.mouvementIsVertial = mouvementIsVertial;
         this.texture = texture;
         this.map = map;
-        int randomYposition = rnd.Next(0, this.map.yPixel);
 
         if (randomizeSize)
         {
+            int randomYposition = rnd.Next(0, this.map.yPixel);
+
             addPrefixedSizes();
             SizeElement sizeSelected = prefixedSizes[rnd.Next(0, prefixedSizes.Count)];
             this.element = new Rectangle(randomYposition, 0 - sizeSelected.sizeY, sizeSelected.sizeX, sizeSelected.sizeY);
 
         } else
         {
-            this.element = new Rectangle(randomYposition, 0 - sizeElement.sizeY, sizeElement.sizeX, sizeElement.sizeY);
+            if (this.mouvementIsVertial == false)
+            {
+                int randomXposition = rnd.Next(0, this.map.xPixel);
+
+                this.element = new Rectangle(0 - sizeElement.sizeX, randomXposition, sizeElement.sizeX, sizeElement.sizeY);
+            } else
+            {
+                int randomYposition = rnd.Next(0, this.map.yPixel);
+                this.element = new Rectangle(randomYposition, 0 - sizeElement.sizeY, sizeElement.sizeX, sizeElement.sizeY);
+            }
         }
     }
 

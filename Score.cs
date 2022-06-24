@@ -16,6 +16,7 @@ public class Score
 
     public Texture2D textureScore { get; set; }
     public Rectangle elementScore { get; set; }
+    private int baseLife { get; } = 3000;
 
     public Score(GraphicsDevice graphicsDevice, int lossLife, int nRockets)
     {   
@@ -23,7 +24,7 @@ public class Score
         this.textureLossLife.SetData<Color>(new Color[] { Color.White });
         this.nRockets = nRockets;
         this.score = nRockets - lossLife;
-        percentScoreLeft = ((500 - (float)lossLife) / 500);
+        percentScoreLeft = ((baseLife - (float)lossLife) / baseLife);
         float sizeHeight = 675 * percentScoreLeft;
         this.elementLossLife = new Rectangle(20, 20, 50, (int)sizeHeight);
 
