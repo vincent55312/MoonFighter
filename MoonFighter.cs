@@ -180,7 +180,7 @@ public class MoonFighter : Game
                     }
                 }
 
-                Score score = new Score(GraphicsDevice, lossLife, idBullet);
+                Score score = new Score(GraphicsDevice, lossLife, idBullet*10);
 
                 if (score.percentScoreLeft <= 0)
                 {
@@ -190,7 +190,7 @@ public class MoonFighter : Game
 
                 _spriteBatch.Draw(score.textureLossLife, score.elementLossLife, score.color);
                 _spriteBatch.Draw(score.textureScore, score.elementScore, Color.White * 0.9f);
-
+                _spriteBatch.DrawString(Content.Load<SpriteFont>("File"), score.getScore(), new Vector2(1100, 50), Color.Black);
                 foreach (int instanceExpired in instancesBulletExpired)
                 {
                     instancesBullet.Remove(instanceExpired);

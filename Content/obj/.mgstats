@@ -1,2 +1,2 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"C:/Users/vincentv/Desktop/Cours/Dev/MoonFighter/Content/doge.png","C:/Users/vincentv/Desktop/Cours/Dev/MoonFighter/Content/bin/doge.xnb","TextureProcessor","Texture2DContent",84256,1000085,0,375164
+"C:/Users/vincentv/Desktop/Cours/Dev/MoonFighter/Content/File.spritefont","C:/Users/vincentv/Desktop/Cours/Dev/MoonFighter/Content/bin/File.xnb","FontDescriptionProcessor","SpriteFontContent",2008,21538,1,1316845

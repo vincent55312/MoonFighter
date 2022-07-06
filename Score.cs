@@ -18,6 +18,11 @@ public class Score
     public Rectangle elementScore { get; set; }
     private int baseLife { get; } = 3000;
 
+    public string getScore()
+    {
+        return this.score.ToString();
+    }
+
     public Score(GraphicsDevice graphicsDevice, int lossLife, int nRockets)
     {   
         this.textureLossLife = new Texture2D(graphicsDevice, 1, 1);
