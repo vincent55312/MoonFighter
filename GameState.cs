@@ -1,4 +1,4 @@
-﻿enum GameState
+﻿public enum GameState
 {
     MainMenu,
     Game

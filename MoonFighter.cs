@@ -13,13 +13,15 @@ public class MoonFighter : Game
     private Map map { get; set; }
     private Fighter fighter { get; set; }
     private Dictionary<int, Bullet> instancesBullet { get; set; } = new Dictionary<int, Bullet>();
+    private Dictionary<int, Button> menu { get; set; } = new Dictionary<int, Button>();
+
     private int idBullet { get; set; } = 0;
     private int lossLife { get; set; } = 0;
     private int boostSpeedBullets { get; set; } = 0;
     private int boostGeneration { get; set; } = 0;
     private int nFrameUpdated { get; set; } = 0;
 
-    private GameState _gameState { get; set; } = GameState.Game;
+    private GameState _gameState { get; set; } = GameState.MainMenu;
 
     public MoonFighter()
     {
@@ -30,6 +32,8 @@ public class MoonFighter : Game
 
     protected override void Initialize()
     {
+        menu.Add(1, new Button(new Rectangle(0, 0, 200, 100), 50, 50, GameState.Game, Color.AntiqueWhite, "Play", GraphicsDevice));
+
         map = new Map(1200, 720, 1, Content.Load<Texture2D>("background"));
         fighter = new Fighter(8, 12, new Rectangle(map.yPixel/2, map.xPixel/2, 125, 75), Content.Load<Texture2D>("fighter"));
 
@@ -48,101 +52,103 @@ public class MoonFighter : Game
 
     protected override void Update(GameTime gameTime)
     {
-        nFrameUpdated++;
-        if (nFrameUpdated % 300 == 0)
+        if (_gameState == GameState.Game)
         {
-            boostSpeedBullets++;
-        }
-        if (nFrameUpdated % 120 == 0)
-        {
-            boostGeneration++;
-        }
-        if (nFrameUpdated % 600 == 0)
-        {
-            fighter.speed++;
-        }
-        if (nFrameUpdated % 500 == 0)
-        {
-            instancesBullet.Add(idBullet, new Bullet(2 + boostSpeedBullets, map, new SizeElement(600, 500), Content.Load<Texture2D>("doge"), false, false));
-            idBullet++;
-        }
-
-
-        Random rnd = new Random();
-        if (rnd.Next(0, 1000) < 10 + boostGeneration)
-        {
-            instancesBullet.Add(idBullet, new Bullet(1 + boostSpeedBullets, map, new SizeElement(30, 80), Content.Load<Texture2D>("meteor"), true));
-            idBullet++;
-        }
-
-        if (rnd.Next(0, 1000) < 5 + boostGeneration)
-        {
-            instancesBullet.Add(idBullet, new Bullet(1 + boostSpeedBullets*2, map, new SizeElement(30, 80), Content.Load<Texture2D>("rocket")));
-            idBullet++;
-        }
-
-        if (rnd.Next(0, 1000) < 1 + boostGeneration)
-        {
-            instancesBullet.Add(idBullet, new Bullet(1 + boostSpeedBullets*3, map, new SizeElement(120, 100), Content.Load<Texture2D>("alien")));
-            idBullet++;
-        }
-
-
-        foreach (Bullet instance in instancesBullet.Values)
-        {
-            if (instance.mouvementIsVertial)
+            nFrameUpdated++;
+            if (nFrameUpdated % 300 == 0)
             {
-                instance.element.Y += instance.speed;
-            } else
-            {
-                instance.element.X += instance.speed;
+                boostSpeedBullets++;
             }
-        }
+            if (nFrameUpdated % 120 == 0)
+            {
+                boostGeneration++;
+            }
+            if (nFrameUpdated % 600 == 0)
+            {
+                fighter.speed++;
+            }
+            if (nFrameUpdated % 500 == 0)
+            {
+                instancesBullet.Add(idBullet, new Bullet(2 + boostSpeedBullets, map, new SizeElement(600, 500), Content.Load<Texture2D>("doge"), false, false));
+                idBullet++;
+            }
 
-        if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-        {
-            Exit();
-        }
-        else
-        {
-            if (Keyboard.GetState().IsKeyDown(Keys.Space))
+
+            Random rnd = new Random();
+            if (rnd.Next(0, 1000) < 10 + boostGeneration)
             {
-                if ((fighter.element.Y - 20) < 0 == false)
-                {
-                    fighter.element.Y -= 20;
-                }
+                instancesBullet.Add(idBullet, new Bullet(1 + boostSpeedBullets, map, new SizeElement(30, 80), Content.Load<Texture2D>("meteor"), true));
+                idBullet++;
             }
-            else if (Keyboard.GetState().IsKeyDown(Keys.Q))
+
+            if (rnd.Next(0, 1000) < 5 + boostGeneration)
             {
-                if (fighter.element.X + fighter.element.Width < 0)
-                {
-                    fighter.element.X += map.yPixel;
-                }
-                fighter.element.X -= fighter.speed;
+                instancesBullet.Add(idBullet, new Bullet(1 + boostSpeedBullets*2, map, new SizeElement(30, 80), Content.Load<Texture2D>("rocket")));
+                idBullet++;
             }
-            else if (Keyboard.GetState().IsKeyDown(Keys.D))
+
+            if (rnd.Next(0, 1000) < 1 + boostGeneration)
             {
-                if (fighter.element.X > map.yPixel)
-                {
-                    fighter.element.X -= map.yPixel;
-                }
-                fighter.element.X += fighter.speed;
+                instancesBullet.Add(idBullet, new Bullet(1 + boostSpeedBullets*3, map, new SizeElement(120, 100), Content.Load<Texture2D>("alien")));
+                idBullet++;
             }
-            else if (Keyboard.GetState().IsKeyDown(Keys.S))
+
+
+            foreach (Bullet instance in instancesBullet.Values)
             {
-                if ((fighter.element.Y + fighter.element.Height + fighter.speed) > map.xPixel == false)
+                if (instance.mouvementIsVertial)
                 {
-                    fighter.element.Y += fighter.speed;
+                    instance.element.Y += instance.speed;
+                } else
+                {
+                    instance.element.X += instance.speed;
                 }
             }
 
-            // Gravity set up
-            if ((fighter.element.Y + fighter.element.Height + map.gravity) > map.xPixel == false)
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
-
-                fighter.element.Y += map.gravity;
+                Exit();
             }
+            else
+            {
+                if (Keyboard.GetState().IsKeyDown(Keys.Space))
+                {
+                    if ((fighter.element.Y - 20) < 0 == false)
+                    {
+                        fighter.element.Y -= 20;
+                    }
+                }
+                else if (Keyboard.GetState().IsKeyDown(Keys.Q))
+                {
+                    if (fighter.element.X + fighter.element.Width < 0)
+                    {
+                        fighter.element.X += map.yPixel;
+                    }
+                    fighter.element.X -= fighter.speed;
+                }
+                else if (Keyboard.GetState().IsKeyDown(Keys.D))
+                {
+                    if (fighter.element.X > map.yPixel)
+                    {
+                        fighter.element.X -= map.yPixel;
+                    }
+                    fighter.element.X += fighter.speed;
+                }
+                else if (Keyboard.GetState().IsKeyDown(Keys.S))
+                {
+                    if ((fighter.element.Y + fighter.element.Height + fighter.speed) > map.xPixel == false)
+                    {
+                        fighter.element.Y += fighter.speed;
+                    }
+                }
 
+                // Gravity set up
+                if ((fighter.element.Y + fighter.element.Height + map.gravity) > map.xPixel == false)
+                {
+
+                    fighter.element.Y += map.gravity;
+                }
+            }
             base.Update(gameTime);
         }
     }
@@ -153,14 +159,32 @@ public class MoonFighter : Game
         switch (_gameState)
         {
             case GameState.MainMenu:
+                MouseState mouse = Mouse.GetState();
+                var mousePosition = new Point(mouse.X, mouse.Y);
 
                 _spriteBatch.Begin();
                 _spriteBatch.Draw(map.texture, new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), Color.White);
-                
+
+                foreach (KeyValuePair<int, Button> button in menu)
+                {
+                    _spriteBatch.Draw(button.Value.texture2D, new Vector2(button.Value.positionX, button.Value.positionY),
+                        button.Value.rectangle, Color.BlanchedAlmond);
+                    _spriteBatch.DrawString(Content.Load<SpriteFont>("File"), button.Value.text, new Vector2(button.Value.positionX, button.Value.positionY), Color.Black);
+
+                    if (button.Value.rectangle.Contains(mousePosition))
+                    {
+                        if (mouse.LeftButton == ButtonState.Pressed)
+                        {
+                            _gameState = button.Value.gameState;
+                        }
+                    }
+                }
+
                 _spriteBatch.End();
                 break;
 
             case GameState.Game:
+                nFrameUpdated = 0;
                 _spriteBatch.Begin();
                 _spriteBatch.Draw(map.texture, new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), Color.White);
                 _spriteBatch.Draw(fighter.texture, fighter.element, Color.White);
@@ -174,7 +198,7 @@ public class MoonFighter : Game
                         lossLife++;
                     }
 
-                    if (instance.Value.element.Y > map.xPixel || instance.Value.sizeX > map.yPixel)
+                    if (instance.Value.element.Y > map.xPixel || instance.Value.element.X > map.yPixel)
                     {
                         instancesBulletExpired.Add(instance.Key);
                     }
