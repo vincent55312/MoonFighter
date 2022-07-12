@@ -217,7 +217,7 @@ public class MoonFighter : Game
                 _spriteBatch.Draw(map.texture, new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), Color.White);
                 _spriteBatch.Draw(fighter.texture, fighter.element, Color.White);
 
-                instancesBullet.ForEach(delegate (Bullet instance) {
+                instancesBullet.ForEach(delegate (Bullet instance)
                 {
                     _spriteBatch.Draw(instance.texture, instance.element, Color.White);
                     if (instance.element.Intersects(fighter.element))
@@ -234,7 +234,7 @@ public class MoonFighter : Game
                     {
                         instance.element.X -= map.yPixel * 2;
                     }
-                }
+                });
 
                 Score score = new Score(GraphicsDevice, lossLife, nFrameUpdated);
 
