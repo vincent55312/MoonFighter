@@ -14,8 +14,8 @@ public class MoonFighter : Game
     private Texture2D background { get; set; }
     private Map map { get; set; }
     private Fighter fighter { get; set; }
-    private Dictionary<int, Bullet> instancesBullet { get; set; } = new Dictionary<int, Bullet>();
-    private Dictionary<int, Button> menu { get; set; } = new Dictionary<int, Button>();
+    private List<Bullet> instancesBullet { get; set; } = new List<Bullet>();
+    private List<Button> menu { get; set; } = new List<Button>();
 
     private int idBullet { get; set; } = 0;
     private int lossLife { get; set; } = 0;
@@ -37,14 +37,13 @@ public class MoonFighter : Game
 
     protected override void Initialize()
     {
-
-        menu.Add(1, new Button(new Rectangle(450, Window.ClientBounds.Height/4, 200, 50), 450, Window.ClientBounds.Height / 4, GameState.Game, Color.AntiqueWhite, "Play", GraphicsDevice));
-        menu.Add(2, new Button(new Rectangle(450, Window.ClientBounds.Height / 3, 200, 50), 450, Window.ClientBounds.Height / 3, GameState.GameOver, Color.AntiqueWhite, "Reload", GraphicsDevice));
-        menu.Add(3, new Button(new Rectangle(450, Window.ClientBounds.Height / 2, 200, 50), 450, Window.ClientBounds.Height / 2, GameState.Score, Color.AntiqueWhite, "Score", GraphicsDevice));
-        menu.Add(4, new Button(new Rectangle(450, Window.ClientBounds.Height / 1, 200, 50), 450, Window.ClientBounds.Height / 1, GameState.Quit, Color.AntiqueWhite, "Quit", GraphicsDevice));
+        menu.Add(new Button(new Rectangle(450, Window.ClientBounds.Height/4, 200, 50), 450, Window.ClientBounds.Height / 4, GameState.Game, Color.AntiqueWhite, "Play", GraphicsDevice));
+        menu.Add(new Button(new Rectangle(450, Window.ClientBounds.Height / 3, 200, 50), 450, Window.ClientBounds.Height / 3, GameState.GameOver, Color.AntiqueWhite, "Reload", GraphicsDevice));
+        menu.Add(new Button(new Rectangle(450, Window.ClientBounds.Height / 2, 200, 50), 450, Window.ClientBounds.Height / 2, GameState.Score, Color.AntiqueWhite, "Score", GraphicsDevice));
+        menu.Add(new Button(new Rectangle(450, Window.ClientBounds.Height / 1, 200, 50), 450, Window.ClientBounds.Height / 1, GameState.Quit, Color.AntiqueWhite, "Quit", GraphicsDevice));
 
         map = new Map(1200, 720, 1, Content.Load<Texture2D>("background"));
-        fighter = new Fighter(100, 8, 12, new Rectangle(map.yPixel/2, map.xPixel/2, 125, 75), Content.Load<Texture2D>("fighter"));
+        fighter = new Fighter(100, 8, 12, new Rectangle(map.yPixel / 2, map.xPixel / 2, 125, 75), Content.Load<Texture2D>("fighter"));
         background = Content.Load<Texture2D>("gameOver");
         _graphics.PreferredBackBufferWidth = map.yPixel;
         _graphics.PreferredBackBufferHeight = map.xPixel;
@@ -89,31 +88,31 @@ public class MoonFighter : Game
             {
                 if (rnd.Next(0, 1000) < 10 + boostGeneration)
                 {
-                    instancesBullet.Add(idBullet, new Bullet(1 + boostSpeedBullets, map, new SizeElement(30, 80), Content.Load<Texture2D>("meteor"), true));
+                    instancesBullet.Add(new Bullet(1 + boostSpeedBullets, map, new SizeElement(30, 80), Content.Load<Texture2D>("meteor"), true));
                     idBullet++;
                 }
 
                 if (rnd.Next(0, 1000) < 5 + boostGeneration)
                 {
-                    instancesBullet.Add(idBullet, new Bullet(1 + boostSpeedBullets * 2, map, new SizeElement(30, 80), Content.Load<Texture2D>("rocket")));
+                    instancesBullet.Add(new Bullet(1 + boostSpeedBullets * 2, map, new SizeElement(30, 80), Content.Load<Texture2D>("rocket")));
                     idBullet++;
                 }
 
                 if (rnd.Next(0, 1000) < 1 + boostGeneration)
                 {
-                    instancesBullet.Add(idBullet, new Bullet(1 + boostSpeedBullets * 3, map, new SizeElement(120, 100), Content.Load<Texture2D>("alien")));
+                    instancesBullet.Add(new Bullet(1 + boostSpeedBullets * 3, map, new SizeElement(120, 100), Content.Load<Texture2D>("alien")));
                     idBullet++;
                 }
 
                 if (rnd.Next(0, 1000) < 1 + boostGeneration)
                 {
-                    instancesBullet.Add(idBullet, new Bullet(2 + boostSpeedBullets * 2, map, new SizeElement(300, 225), Content.Load<Texture2D>("doge"), false, false));
+                    instancesBullet.Add(new Bullet(2 + boostSpeedBullets * 2, map, new SizeElement(300, 225), Content.Load<Texture2D>("doge"), false, false));
                     idBullet++;
                 }
             }
 
 
-            foreach (Bullet instance in instancesBullet.Values)
+            foreach (Bullet instance in instancesBullet)
             {
                 if (instance.mouvementIsVertial)
                 {
@@ -184,46 +183,56 @@ public class MoonFighter : Game
                 _spriteBatch.Begin();
                 _spriteBatch.Draw(map.texture, new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), Color.White);
 
-                foreach (KeyValuePair<int, Button> button in menu)
+                menu.ForEach(delegate (Button button)
                 {
-                    _spriteBatch.Draw(button.Value.texture2D, new Vector2(button.Value.positionX, button.Value.positionY),
-                        button.Value.rectangle, Color.BlanchedAlmond);
-                    _spriteBatch.DrawString(Content.Load<SpriteFont>("File"), button.Value.text, new Vector2(button.Value.positionX, button.Value.positionY), Color.Black);
+                    _spriteBatch.Draw(button.texture2D, new Vector2(button.positionX, button.positionY),
+                        button.rectangle, Color.BlanchedAlmond);
+                    _spriteBatch.DrawString(Content.Load<SpriteFont>("File"), button.text, new Vector2(button.positionX, button.positionY), Color.Black);
 
-                    if (button.Value.rectangle.Contains(mousePosition))
+                    if (button.rectangle.Contains(mousePosition))
                     {
                         if (mouse.LeftButton == ButtonState.Pressed)
                         {
-                            _gameState = button.Value.gameState;
+                            _gameState = button.gameState;
                         }
                     }
-                }
+                });
 
                 _spriteBatch.End();
                 break;
 
             case GameState.Game:
+                fighter.speed = 8;
+                fighter.jump = 12;
+                fighter.health = 100;
+                nFrameUpdated = 0;
+                nDrawUpdated = 0;
+                lossLife = 0;
+                idBullet = 0;
+                boostGeneration = 0;
+                boostSpeedBullets = 0;
+                onGameOver = false;
+
                 _spriteBatch.Begin();
                 _spriteBatch.Draw(map.texture, new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), Color.White);
                 _spriteBatch.Draw(fighter.texture, fighter.element, Color.White);
 
-                List<int> instancesBulletExpired = new List<int>();
-                foreach (KeyValuePair<int, Bullet> instance in instancesBullet)
+                instancesBullet.ForEach(delegate (Bullet instance) {
                 {
-                    _spriteBatch.Draw(instance.Value.texture, instance.Value.element, Color.White);
-                    if (instance.Value.element.Intersects(fighter.element))
+                    _spriteBatch.Draw(instance.texture, instance.element, Color.White);
+                    if (instance.element.Intersects(fighter.element))
                     {
                         lossLife++;
                     }
 
-                    if (instance.Value.element.Y > map.xPixel)
+                    if (instance.element.Y > map.xPixel)
                     {
-                        instance.Value.element.Y -= map.yPixel * 2;
+                        instance.element.Y -= map.yPixel * 2;
                     }
 
-                    if (instance.Value.element.X > map.yPixel)
+                    if (instance.element.X > map.yPixel)
                     {
-                        instance.Value.element.X -= map.yPixel * 2;
+                        instance.element.X -= map.yPixel * 2;
                     }
                 }
 
@@ -237,13 +246,10 @@ public class MoonFighter : Game
                 _spriteBatch.Draw(score.textureLossLife, score.elementLossLife, score.color);
                 _spriteBatch.Draw(score.textureScore, score.elementScore, Color.White * 0.9f);
                 _spriteBatch.DrawString(Content.Load<SpriteFont>("File"), score.getScore(), new Vector2(1100, 50), Color.Black);
-
-
                 _spriteBatch.End();
                 break;
 
             case GameState.GameOver:
-
                 _spriteBatch.Begin();
                 _spriteBatch.Draw(map.texture, new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), Color.Red);
                 _spriteBatch.Draw(background, new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), Color.Red);
@@ -258,6 +264,7 @@ public class MoonFighter : Game
                 if (nDrawUpdated > (450 + numberBase))
                 {
                     _gameState = GameState.MainMenu;
+                    onGameOver = false;
                 }
 
                 _spriteBatch.End();
