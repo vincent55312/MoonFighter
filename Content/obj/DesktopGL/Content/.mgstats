@@ -1,10 +1,1 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"C:/Users/vincentv/Desktop/Cours/Dev/MoonFighter/Content/alien.png","C:/Users/vincentv/Desktop/Cours/Dev/MoonFighter/Content/bin/DesktopGL/Content/alien.xnb","TextureProcessor","Texture2DContent",96204,608429,0,1748415
-"C:/Users/vincentv/Desktop/Cours/Dev/MoonFighter/Content/background.jpg","C:/Users/vincentv/Desktop/Cours/Dev/MoonFighter/Content/bin/DesktopGL/Content/background.xnb","TextureProcessor","Texture2DContent",1948871,33177685,1,5886899
-"C:/Users/vincentv/Desktop/Cours/Dev/MoonFighter/Content/doge.png","C:/Users/vincentv/Desktop/Cours/Dev/MoonFighter/Content/bin/DesktopGL/Content/doge.xnb","TextureProcessor","Texture2DContent",84256,1000085,0,0476009
-"C:/Users/vincentv/Desktop/Cours/Dev/MoonFighter/Content/fighter.png","C:/Users/vincentv/Desktop/Cours/Dev/MoonFighter/Content/bin/DesktopGL/Content/fighter.xnb","TextureProcessor","Texture2DContent",155131,406705,0,0110303
-"C:/Users/vincentv/Desktop/Cours/Dev/MoonFighter/Content/File.spritefont","C:/Users/vincentv/Desktop/Cours/Dev/MoonFighter/Content/bin/DesktopGL/Content/File.xnb","FontDescriptionProcessor","SpriteFontContent",2068,21538,0,1156122
-"C:/Users/vincentv/Desktop/Cours/Dev/MoonFighter/Content/gameOver.png","C:/Users/vincentv/Desktop/Cours/Dev/MoonFighter/Content/bin/DesktopGL/Content/gameOver.xnb","TextureProcessor","Texture2DContent",141519,5242965,0,1729768
-"C:/Users/vincentv/Desktop/Cours/Dev/MoonFighter/Content/meteor.png","C:/Users/vincentv/Desktop/Cours/Dev/MoonFighter/Content/bin/DesktopGL/Content/meteor.xnb","TextureProcessor","Texture2DContent",85053,444085,0,0231936
-"C:/Users/vincentv/Desktop/Cours/Dev/MoonFighter/Content/music.mp3","C:/Users/vincentv/Desktop/Cours/Dev/MoonFighter/Content/bin/DesktopGL/Content/music.xnb","SongProcessor","SongContent",4939067,123,3,3177292
-"C:/Users/vincentv/Desktop/Cours/Dev/MoonFighter/Content/rocket.png","C:/Users/vincentv/Desktop/Cours/Dev/MoonFighter/Content/bin/DesktopGL/Content/rocket.xnb","TextureProcessor","Texture2DContent",8967,504085,0,0100937
