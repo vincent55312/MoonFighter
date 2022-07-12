@@ -9,11 +9,13 @@
     <File>C:/Users/Dylan/Desktop/MoonFighter/MoonFighter/Content/doge.png</File>
     <File>C:/Users/Dylan/Desktop/MoonFighter/MoonFighter/Content/fighter.png</File>
     <File>C:/Users/Dylan/Desktop/MoonFighter/MoonFighter/Content/File.spritefont</File>
+    <File>C:/Users/Dylan/Desktop/MoonFighter/MoonFighter/Content/gameOver.png</File>
     <File>C:/Users/Dylan/Desktop/MoonFighter/MoonFighter/Content/meteor.png</File>
     <File>C:/Users/Dylan/Desktop/MoonFighter/MoonFighter/Content/music.mp3</File>
     <File>C:/Users/Dylan/Desktop/MoonFighter/MoonFighter/Content/rocket.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

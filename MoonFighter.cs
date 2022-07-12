@@ -32,10 +32,13 @@ public class MoonFighter : Game
 
     protected override void Initialize()
     {
-        menu.Add(1, new Button(new Rectangle(0, 0, 200, 100), 50, 50, GameState.Game, Color.AntiqueWhite, "Play", GraphicsDevice));
+        menu.Add(1, new Button(new Rectangle(Window.ClientBounds.Width/2, Window.ClientBounds.Height/4, 200, 50), Window.ClientBounds.Width / 2, Window.ClientBounds.Height / 4, GameState.Game, Color.AntiqueWhite, "Play", GraphicsDevice));
+        menu.Add(2, new Button(new Rectangle(Window.ClientBounds.Width / 2, Window.ClientBounds.Height / 3, 200, 50), Window.ClientBounds.Width / 2, Window.ClientBounds.Height / 3, GameState.GameOver, Color.AntiqueWhite, "Reload", GraphicsDevice));
+        menu.Add(3, new Button(new Rectangle(Window.ClientBounds.Width / 2, Window.ClientBounds.Height / 2, 200, 50), Window.ClientBounds.Width / 2, Window.ClientBounds.Height / 2, GameState.Score, Color.AntiqueWhite, "Score", GraphicsDevice));
+        menu.Add(4, new Button(new Rectangle(Window.ClientBounds.Width / 2, Window.ClientBounds.Height / 1, 200, 50), Window.ClientBounds.Width / 2, Window.ClientBounds.Height / 1, GameState.Quit, Color.AntiqueWhite, "Quit", GraphicsDevice));
 
         map = new Map(1200, 720, 1, Content.Load<Texture2D>("background"));
-        fighter = new Fighter(8, 12, new Rectangle(map.yPixel/2, map.xPixel/2, 125, 75), Content.Load<Texture2D>("fighter"));
+        fighter = new Fighter(100, 8, 12, new Rectangle(map.yPixel/2, map.xPixel/2, 125, 75), Content.Load<Texture2D>("fighter"));
 
         _graphics.PreferredBackBufferWidth = map.yPixel;
         _graphics.PreferredBackBufferHeight = map.xPixel;
@@ -49,11 +52,19 @@ public class MoonFighter : Game
         MediaPlayer.Play(Content.Load<Song>("music"));
         MediaPlayer.IsRepeating = true;
     }
-
     protected override void Update(GameTime gameTime)
     {
+
+        if ( _gameState == GameState.Quit)
+        {
+            Exit();
+        }
         if (_gameState == GameState.Game)
         {
+            if (Keyboard.GetState().IsKeyDown(Keys.M))
+            {
+                _gameState = GameState.MainMenu;
+            }
             nFrameUpdated++;
             if (nFrameUpdated % 300 == 0)
             {
@@ -183,45 +194,14 @@ public class MoonFighter : Game
                 _spriteBatch.End();
                 break;
 
-            case GameState.Game:
-                nFrameUpdated = 0;
+
+            case GameState.GameOver:
                 _spriteBatch.Begin();
                 _spriteBatch.Draw(map.texture, new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), Color.White);
-                _spriteBatch.Draw(fighter.texture, fighter.element, Color.White);
-
-                List<int> instancesBulletExpired = new List<int>();
-                foreach (KeyValuePair<int, Bullet> instance in instancesBullet)
-                {
-                    _spriteBatch.Draw(instance.Value.texture, instance.Value.element, Color.White);
-                    if (instance.Value.element.Intersects(fighter.element))
-                    {
-                        lossLife++;
-                    }
-
-                    if (instance.Value.element.Y > map.xPixel || instance.Value.element.X > map.yPixel)
-                    {
-                        instancesBulletExpired.Add(instance.Key);
-                    }
-                }
-
-                Score score = new Score(GraphicsDevice, lossLife, idBullet*10);
-
-                if (score.percentScoreLeft <= 0)
-                {
-                    _gameState = GameState.MainMenu;
-                }
-
-
-                _spriteBatch.Draw(score.textureLossLife, score.elementLossLife, score.color);
-                _spriteBatch.Draw(score.textureScore, score.elementScore, Color.White * 0.9f);
-                _spriteBatch.DrawString(Content.Load<SpriteFont>("File"), score.getScore(), new Vector2(1100, 50), Color.Black);
-                foreach (int instanceExpired in instancesBulletExpired)
-                {
-                    instancesBullet.Remove(instanceExpired);
-                }
-
+               
                 _spriteBatch.End();
                 break;
+
 
             default:
 
