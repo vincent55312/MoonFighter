@@ -184,7 +184,6 @@ public class MoonFighter : Game
                 break;
 
             case GameState.Game:
-                nFrameUpdated = 0;
                 _spriteBatch.Begin();
                 _spriteBatch.Draw(map.texture, new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), Color.White);
                 _spriteBatch.Draw(fighter.texture, fighter.element, Color.White);
