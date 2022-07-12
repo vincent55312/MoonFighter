@@ -5,7 +5,6 @@ using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Threading;
 
 public class MoonFighter : Game
 {
@@ -22,10 +21,9 @@ public class MoonFighter : Game
     private int boostSpeedBullets { get; set; } = 0;
     private int boostGeneration { get; set; } = 0;
     private int nFrameUpdated { get; set; } = 0;
-    private int nDrawUpdated { get; set; } = 0;
     private bool onGameOver { get; set; } = false;
     private int maxEntityGeneration { get; set; } = 80;
-
+    private double elapsedTime { get; set; } = 0f;
     private bool enterOnGame { get; set; } = true;
 
     private GameState _gameState { get; set; } = GameState.MainMenu;
@@ -176,7 +174,6 @@ public class MoonFighter : Game
 
     protected override void Draw(GameTime gameTime)
     {
-        nDrawUpdated++;
         switch (_gameState)
         {
             case GameState.MainMenu:
@@ -207,7 +204,6 @@ public class MoonFighter : Game
             case GameState.Game:
                 if (enterOnGame)
                 {
-                    nDrawUpdated = 0;
                     fighter.speed = 8;
                     fighter.jump = 12;
                     fighter.element = new Rectangle(map.yPixel / 2, map.xPixel / 2, 125, 75);
@@ -217,9 +213,9 @@ public class MoonFighter : Game
                     idBullet = 0;
                     boostGeneration = 0;
                     boostSpeedBullets = 0;
-                    onGameOver = false;
                     enterOnGame = false;
                     instancesBullet.Clear();
+                    elapsedTime = 0;
                 }
                 _spriteBatch.Begin();
                 _spriteBatch.Draw(map.texture, new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), Color.White);
@@ -249,7 +245,6 @@ public class MoonFighter : Game
                 if (score.percentScoreLeft <= 0)
                 {
                     _gameState = GameState.GameOver;
-                    onGameOver = false;
                 }
 
                 _spriteBatch.Draw(score.textureLossLife, score.elementLossLife, score.color);
@@ -262,19 +257,15 @@ public class MoonFighter : Game
                 _spriteBatch.Begin();
                 _spriteBatch.Draw(map.texture, new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), Color.Red);
                 _spriteBatch.Draw(background, new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), Color.Red);
+                
+                
+                elapsedTime += gameTime.ElapsedGameTime.TotalMilliseconds;
 
-                int numberBase = 0;
-                if (onGameOver == false)
+                if (elapsedTime >= 2000)
                 {
-                    numberBase = nDrawUpdated;
-                    onGameOver = true;
+                    elapsedTime = 0;
                     enterOnGame = true;
-                }
-
-                if (nDrawUpdated > (450 + numberBase))
-                {
                     _gameState = GameState.MainMenu;
-                    onGameOver = false;
                 }
 
                 _spriteBatch.End();

@@ -6,9 +6,9 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 
-public class Button
+public class Button: GraphicElement
 {
-    public Button(Rectangle rectangle, int positionX, int positionY, GameState gameState, Color colorBackground, string text, GraphicsDevice graphicsDevice)
+    public Button(Rectangle rectangle, int positionX, int positionY, GameState gameState, Color colorBackground, string text, GraphicsDevice graphicsDevice): base(graphicsDevice)
     {
         this.positionX = positionX;
         this.positionY = positionY;
