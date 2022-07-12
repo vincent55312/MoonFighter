@@ -4,12 +4,10 @@ using Microsoft.Xna.Framework.Input;
 
 public class GraphicElement
 {
-    public Texture2D texture { get; set; }
-    public Rectangle element { get; set; }
+    public GraphicsDevice graphicsDevice { get; set; }
 
-    public GraphicElement(Rectangle element, Texture2D texture)
+    public GraphicElement(GraphicsDevice graphicsDevice)
     {
-        this.texture = texture;
-        this.element = element;
+        this.graphicsDevice = graphicsDevice;
     }
 }

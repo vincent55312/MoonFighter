@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using System.Diagnostics;
 
-public class Score
+public class Score: GraphicElement
 {
     public Texture2D textureLossLife { get; set; }
     public Rectangle elementLossLife { get; set; }
@@ -23,14 +23,14 @@ public class Score
         return this.score.ToString();
     }
 
-    public Score(GraphicsDevice graphicsDevice, int lossLife, int nFrames)
+    public Score(GraphicsDevice graphicsDevice, int lossLife, int nFrames): base(graphicsDevice)
     {   
-        this.textureLossLife = new Texture2D(graphicsDevice, 1, 1);
-        this.textureLossLife.SetData<Color>(new Color[] { Color.White });
-        this.score = nFrames / 10;
+        textureLossLife = new Texture2D(graphicsDevice, 1, 1);
+        textureLossLife.SetData<Color>(new Color[] { Color.White });
+        score = nFrames / 10;
         percentScoreLeft = ((baseLife - (float)lossLife) / baseLife);
         float sizeHeight = 675 * percentScoreLeft;
-        this.elementLossLife = new Rectangle(20, 20, 50, (int)sizeHeight);
+        elementLossLife = new Rectangle(20, 20, 50, (int)sizeHeight);
 
         if (percentScoreLeft > 0.75f)
         {
@@ -51,8 +51,8 @@ public class Score
         }
         color = color * 0.5f;
 
-        this.textureScore = new Texture2D(graphicsDevice, 1, 1);
-        this.textureScore.SetData<Color>(new Color[] { Color.White });
-        this.elementScore = new Rectangle(1050, 25, 125, 85);
+        textureScore = new Texture2D(graphicsDevice, 1, 1);
+        textureScore.SetData<Color>(new Color[] { Color.White });
+        elementScore = new Rectangle(1050, 25, 125, 85);
     }
 }

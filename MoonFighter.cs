@@ -249,7 +249,6 @@ public class MoonFighter : Game
                 if (score.percentScoreLeft <= 0)
                 {
                     _gameState = GameState.GameOver;
-                    onGameOver = false;
                 }
 
                 _spriteBatch.Draw(score.textureLossLife, score.elementLossLife, score.color);
