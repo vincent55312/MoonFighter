@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 
 public class MoonFighter : Game
 {
@@ -238,6 +239,8 @@ public class MoonFighter : Game
                 _spriteBatch.Begin();
                 _spriteBatch.Draw(map.texture, new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), Color.Red);
                 _spriteBatch.Draw(background, new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), Color.Red);
+                Thread.Sleep(5000);
+                //_gameState = GameState.MainMenu;
 
                 _spriteBatch.End();
 
