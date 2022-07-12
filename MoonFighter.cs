@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading;
 
 public class MoonFighter : Game
@@ -21,6 +22,8 @@ public class MoonFighter : Game
     private int boostSpeedBullets { get; set; } = 0;
     private int boostGeneration { get; set; } = 0;
     private int nFrameUpdated { get; set; } = 0;
+    private int nDrawUpdated { get; set; } = 0;
+    private bool onGameOver { get; set; } = false;
     private int maxEntityGeneration { get; set; } = 80;
 
     private GameState _gameState { get; set; } = GameState.MainMenu;
@@ -171,6 +174,7 @@ public class MoonFighter : Game
 
     protected override void Draw(GameTime gameTime)
     {
+        nDrawUpdated++;
         switch (_gameState)
         {
             case GameState.MainMenu:
@@ -239,14 +243,24 @@ public class MoonFighter : Game
                 break;
 
             case GameState.GameOver:
+
                 _spriteBatch.Begin();
                 _spriteBatch.Draw(map.texture, new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), Color.Red);
                 _spriteBatch.Draw(background, new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), Color.Red);
-                // Thread.Sleep(5000);
-                //_gameState = GameState.MainMenu;
+                
+                int numberBase = 0;
+                if (onGameOver == false)
+                {
+                    numberBase = nDrawUpdated;
+                    onGameOver = true;
+                }
+
+                if (nDrawUpdated > (450 + numberBase))
+                {
+                    _gameState = GameState.MainMenu;
+                }
 
                 _spriteBatch.End();
-
                 break;
             case GameState.Score:
                 _spriteBatch.Begin();

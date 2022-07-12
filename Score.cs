@@ -16,7 +16,7 @@ public class Score
 
     public Texture2D textureScore { get; set; }
     public Rectangle elementScore { get; set; }
-    private int baseLife { get; } = 3000;
+    private int baseLife { get; } = 100;
 
     public string getScore()
     {
