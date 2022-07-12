@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/vincentv/Desktop/Cours/Dev/MoonFighter/Content/alien.png</SourceFile>
-  <SourceTime>2022-06-23T14:03:24.1956051+02:00</SourceTime>
-  <DestFile>C:/Users/vincentv/Desktop/Cours/Dev/MoonFighter/Content/bin/alien.xnb</DestFile>
-  <DestTime>2022-06-23T14:04:21.5790573+02:00</DestTime>
+  <SourceFile>C:/Users/Dylan/Desktop/MoonFighter/MoonFighter/Content/alien.png</SourceFile>
+  <SourceTime>2022-06-23T17:06:44.9545157+02:00</SourceTime>
+  <DestFile>C:/Users/Dylan/Desktop/MoonFighter/MoonFighter/Content/bin/alien.xnb</DestFile>
+  <DestTime>2022-07-12T13:23:59.5852321+02:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2020-08-10T18:17:54+02:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

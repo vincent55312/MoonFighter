@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/vincentv/Desktop/Cours/Dev/MoonFighter/Content/meteor.png</SourceFile>
-  <SourceTime>2022-06-23T11:21:54.0600086+02:00</SourceTime>
-  <DestFile>C:/Users/vincentv/Desktop/Cours/Dev/MoonFighter/Content/bin/DesktopGL/Content/meteor.xnb</DestFile>
-  <DestTime>2022-06-23T11:24:13.9122486+02:00</DestTime>
+  <SourceFile>C:/Users/Dylan/Desktop/MoonFighter/MoonFighter/Content/meteor.png</SourceFile>
+  <SourceTime>2022-06-23T17:06:46.5141537+02:00</SourceTime>
+  <DestFile>C:/Users/Dylan/Desktop/MoonFighter/MoonFighter/Content/bin/DesktopGL/Content/meteor.xnb</DestFile>
+  <DestTime>2022-07-12T12:57:21.427004+02:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2020-08-10T18:17:54+02:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

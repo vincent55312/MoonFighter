@@ -32,10 +32,13 @@ public class MoonFighter : Game
 
     protected override void Initialize()
     {
-        menu.Add(1, new Button(new Rectangle(0, 0, 200, 100), 50, 50, GameState.Game, Color.AntiqueWhite, "Play", GraphicsDevice));
+        menu.Add(1, new Button(new Rectangle(Window.ClientBounds.Width/2, Window.ClientBounds.Height/4, 200, 50), Window.ClientBounds.Width / 2, Window.ClientBounds.Height / 4, GameState.Game, Color.AntiqueWhite, "Play", GraphicsDevice));
+        menu.Add(2, new Button(new Rectangle(Window.ClientBounds.Width / 2, Window.ClientBounds.Height / 3, 200, 50), Window.ClientBounds.Width / 2, Window.ClientBounds.Height / 3, GameState.GameOver, Color.AntiqueWhite, "Reload", GraphicsDevice));
+        menu.Add(3, new Button(new Rectangle(Window.ClientBounds.Width / 2, Window.ClientBounds.Height / 2, 200, 50), Window.ClientBounds.Width / 2, Window.ClientBounds.Height / 2, GameState.Score, Color.AntiqueWhite, "Score", GraphicsDevice));
+        menu.Add(4, new Button(new Rectangle(Window.ClientBounds.Width / 2, Window.ClientBounds.Height / 1, 200, 50), Window.ClientBounds.Width / 2, Window.ClientBounds.Height / 1, GameState.Quit, Color.AntiqueWhite, "Quit", GraphicsDevice));
 
         map = new Map(1200, 720, 1, Content.Load<Texture2D>("background"));
-        fighter = new Fighter(8, 12, new Rectangle(map.yPixel/2, map.xPixel/2, 125, 75), Content.Load<Texture2D>("fighter"));
+        fighter = new Fighter(100, 8, 12, new Rectangle(map.yPixel/2, map.xPixel/2, 125, 75), Content.Load<Texture2D>("fighter"));
 
         _graphics.PreferredBackBufferWidth = map.yPixel;
         _graphics.PreferredBackBufferHeight = map.xPixel;
@@ -49,11 +52,19 @@ public class MoonFighter : Game
         MediaPlayer.Play(Content.Load<Song>("music"));
         MediaPlayer.IsRepeating = true;
     }
-
     protected override void Update(GameTime gameTime)
     {
+
+        if ( _gameState == GameState.Quit)
+        {
+            Exit();
+        }
         if (_gameState == GameState.Game)
         {
+            if (Keyboard.GetState().IsKeyDown(Keys.M))
+            {
+                _gameState = GameState.MainMenu;
+            }
             nFrameUpdated++;
             if (nFrameUpdated % 300 == 0)
             {
