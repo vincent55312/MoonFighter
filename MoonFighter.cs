@@ -10,7 +10,6 @@ public class MoonFighter : Game
     private GraphicsDeviceManager _graphics { get; set; }
     private SpriteBatch _spriteBatch { get; set; }
 
-    private Texture2D background { get; set; }
     private Map map { get; set; }
     private Fighter fighter { get; set; }
     private Dictionary<int, Bullet> instancesBullet { get; set; } = new Dictionary<int, Bullet>();
@@ -40,7 +39,7 @@ public class MoonFighter : Game
 
         map = new Map(1200, 720, 1, Content.Load<Texture2D>("background"));
         fighter = new Fighter(100, 8, 12, new Rectangle(map.yPixel/2, map.xPixel/2, 125, 75), Content.Load<Texture2D>("fighter"));
-        background = Content.Load<Texture2D>("gameOver");
+
         _graphics.PreferredBackBufferWidth = map.yPixel;
         _graphics.PreferredBackBufferHeight = map.xPixel;
         _graphics.ApplyChanges();
@@ -180,7 +179,7 @@ public class MoonFighter : Game
                 foreach (KeyValuePair<int, Button> button in menu)
                 {
                     _spriteBatch.Draw(button.Value.texture2D, new Vector2(button.Value.positionX, button.Value.positionY),
-                    button.Value.rectangle, Color.BlanchedAlmond);
+                        button.Value.rectangle, Color.BlanchedAlmond);
                     _spriteBatch.DrawString(Content.Load<SpriteFont>("File"), button.Value.text, new Vector2(button.Value.positionX, button.Value.positionY), Color.Black);
 
                     if (button.Value.rectangle.Contains(mousePosition))
@@ -191,13 +190,47 @@ public class MoonFighter : Game
                         }
                     }
                 }
+
                 _spriteBatch.End();
                 break;
 
-            case GameState.GameOver:
+            case GameState.Game:
+                nFrameUpdated = 0;
                 _spriteBatch.Begin();
                 _spriteBatch.Draw(map.texture, new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), Color.White);
-                _spriteBatch.Draw(background, new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), Color.White);
+                _spriteBatch.Draw(fighter.texture, fighter.element, Color.White);
+
+                List<int> instancesBulletExpired = new List<int>();
+                foreach (KeyValuePair<int, Bullet> instance in instancesBullet)
+                {
+                    _spriteBatch.Draw(instance.Value.texture, instance.Value.element, Color.White);
+                    if (instance.Value.element.Intersects(fighter.element))
+                    {
+                        lossLife++;
+                    }
+
+                    if (instance.Value.element.Y > map.xPixel || instance.Value.element.X > map.yPixel)
+                    {
+                        instancesBulletExpired.Add(instance.Key);
+                    }
+                }
+
+                Score score = new Score(GraphicsDevice, lossLife, idBullet*10);
+
+                if (score.percentScoreLeft <= 0)
+                {
+                    _gameState = GameState.MainMenu;
+                }
+
+
+                _spriteBatch.Draw(score.textureLossLife, score.elementLossLife, score.color);
+                _spriteBatch.Draw(score.textureScore, score.elementScore, Color.White * 0.9f);
+                _spriteBatch.DrawString(Content.Load<SpriteFont>("File"), score.getScore(), new Vector2(1100, 50), Color.Black);
+                foreach (int instanceExpired in instancesBulletExpired)
+                {
+                    instancesBullet.Remove(instanceExpired);
+                }
+
                 _spriteBatch.End();
                 break;
 
