@@ -210,6 +210,7 @@ public class MoonFighter : Game
                     nDrawUpdated = 0;
                     fighter.speed = 8;
                     fighter.jump = 12;
+                    fighter.element = new Rectangle(map.yPixel / 2, map.xPixel / 2, 125, 75);
                     fighter.health = 100;
                     nFrameUpdated = 0;
                     lossLife = 0;
