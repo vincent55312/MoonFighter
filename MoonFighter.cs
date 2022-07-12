@@ -20,6 +20,7 @@ public class MoonFighter : Game
     private int boostSpeedBullets { get; set; } = 0;
     private int boostGeneration { get; set; } = 0;
     private int nFrameUpdated { get; set; } = 0;
+    private int maxEntityGeneration { get; set; } = 80;
 
     private GameState _gameState { get; set; } = GameState.MainMenu;
 
@@ -77,30 +78,33 @@ public class MoonFighter : Game
             {
                 fighter.speed++;
             }
-            if (nFrameUpdated % 500 == 0)
-            {
-                instancesBullet.Add(idBullet, new Bullet(2 + boostSpeedBullets, map, new SizeElement(600, 500), Content.Load<Texture2D>("doge"), false, false));
-                idBullet++;
-            }
-
 
             Random rnd = new Random();
-            if (rnd.Next(0, 1000) < 10 + boostGeneration)
+            if (idBullet < maxEntityGeneration)
             {
-                instancesBullet.Add(idBullet, new Bullet(1 + boostSpeedBullets, map, new SizeElement(30, 80), Content.Load<Texture2D>("meteor"), true));
-                idBullet++;
-            }
+                if (rnd.Next(0, 1000) < 10 + boostGeneration)
+                {
+                    instancesBullet.Add(idBullet, new Bullet(1 + boostSpeedBullets, map, new SizeElement(30, 80), Content.Load<Texture2D>("meteor"), true));
+                    idBullet++;
+                }
 
-            if (rnd.Next(0, 1000) < 5 + boostGeneration)
-            {
-                instancesBullet.Add(idBullet, new Bullet(1 + boostSpeedBullets*2, map, new SizeElement(30, 80), Content.Load<Texture2D>("rocket")));
-                idBullet++;
-            }
+                if (rnd.Next(0, 1000) < 5 + boostGeneration)
+                {
+                    instancesBullet.Add(idBullet, new Bullet(1 + boostSpeedBullets * 2, map, new SizeElement(30, 80), Content.Load<Texture2D>("rocket")));
+                    idBullet++;
+                }
 
-            if (rnd.Next(0, 1000) < 1 + boostGeneration)
-            {
-                instancesBullet.Add(idBullet, new Bullet(1 + boostSpeedBullets*3, map, new SizeElement(120, 100), Content.Load<Texture2D>("alien")));
-                idBullet++;
+                if (rnd.Next(0, 1000) < 1 + boostGeneration)
+                {
+                    instancesBullet.Add(idBullet, new Bullet(1 + boostSpeedBullets * 3, map, new SizeElement(120, 100), Content.Load<Texture2D>("alien")));
+                    idBullet++;
+                }
+
+                if (rnd.Next(0, 1000) < 1 + boostGeneration)
+                {
+                    instancesBullet.Add(idBullet, new Bullet(2 + boostSpeedBullets * 2, map, new SizeElement(300, 225), Content.Load<Texture2D>("doge"), false, false));
+                    idBullet++;
+                }
             }
 
 
@@ -155,7 +159,6 @@ public class MoonFighter : Game
                 // Gravity set up
                 if ((fighter.element.Y + fighter.element.Height + map.gravity) > map.xPixel == false)
                 {
-
                     fighter.element.Y += map.gravity;
                 }
             }
@@ -194,7 +197,6 @@ public class MoonFighter : Game
                 break;
 
             case GameState.Game:
-                nFrameUpdated = 0;
                 _spriteBatch.Begin();
                 _spriteBatch.Draw(map.texture, new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), Color.White);
                 _spriteBatch.Draw(fighter.texture, fighter.element, Color.White);
@@ -208,33 +210,33 @@ public class MoonFighter : Game
                         lossLife++;
                     }
 
-                    if (instance.Value.element.Y > map.xPixel || instance.Value.element.X > map.yPixel)
+                    if (instance.Value.element.Y > map.xPixel)
                     {
-                        instancesBulletExpired.Add(instance.Key);
+                        instance.Value.element.Y -= map.yPixel * 2;
+                    }
+
+                    if (instance.Value.element.X > map.yPixel)
+                    {
+                        instance.Value.element.X -= map.yPixel * 2;
                     }
                 }
 
-                Score score = new Score(GraphicsDevice, lossLife, idBullet*10);
+                Score score = new Score(GraphicsDevice, lossLife, nFrameUpdated);
 
                 if (score.percentScoreLeft <= 0)
                 {
                     _gameState = GameState.MainMenu;
                 }
 
-
                 _spriteBatch.Draw(score.textureLossLife, score.elementLossLife, score.color);
                 _spriteBatch.Draw(score.textureScore, score.elementScore, Color.White * 0.9f);
                 _spriteBatch.DrawString(Content.Load<SpriteFont>("File"), score.getScore(), new Vector2(1100, 50), Color.Black);
-                foreach (int instanceExpired in instancesBulletExpired)
-                {
-                    instancesBullet.Remove(instanceExpired);
-                }
+
 
                 _spriteBatch.End();
                 break;
-
+                
             default:
-
                 break;
         }
 

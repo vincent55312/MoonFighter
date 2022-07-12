@@ -23,11 +23,11 @@ public class Score
         return this.score.ToString();
     }
 
-    public Score(GraphicsDevice graphicsDevice, int lossLife, int nRockets)
+    public Score(GraphicsDevice graphicsDevice, int lossLife, int nFrames)
     {   
         this.textureLossLife = new Texture2D(graphicsDevice, 1, 1);
         this.textureLossLife.SetData<Color>(new Color[] { Color.White });
-        this.score = nRockets;
+        this.score = nFrames / 10;
         percentScoreLeft = ((baseLife - (float)lossLife) / baseLife);
         float sizeHeight = 675 * percentScoreLeft;
         this.elementLossLife = new Rectangle(20, 20, 50, (int)sizeHeight);
@@ -50,8 +50,6 @@ public class Score
             color = Color.Red;
         }
         color = color * 0.5f;
-
-
 
         this.textureScore = new Texture2D(graphicsDevice, 1, 1);
         this.textureScore.SetData<Color>(new Color[] { Color.White });
