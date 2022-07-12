@@ -24,6 +24,8 @@ public class MoonFighter : Game
     private int nFrameUpdated { get; set; } = 0;
     private int nDrawUpdated { get; set; } = 0;
     private bool onGameOver { get; set; } = false;
+    private bool onGame { get; set; } = false;
+
     private int maxEntityGeneration { get; set; } = 80;
 
     private GameState _gameState { get; set; } = GameState.MainMenu;
@@ -202,16 +204,21 @@ public class MoonFighter : Game
                 break;
 
             case GameState.Game:
-                fighter.speed = 8;
-                fighter.jump = 12;
-                fighter.health = 100;
-                nFrameUpdated = 0;
-                nDrawUpdated = 0;
-                lossLife = 0;
-                idBullet = 0;
-                boostGeneration = 0;
-                boostSpeedBullets = 0;
-                onGameOver = false;
+                if (onGame == false)
+                {
+                    fighter.speed = 8;
+                    fighter.jump = 12;
+                    fighter.health = 100;
+                    nFrameUpdated = 0;
+                    nDrawUpdated = 0;
+                    lossLife = 0;
+                    idBullet = 0;
+                    boostGeneration = 0;
+                    boostSpeedBullets = 0;
+                    onGameOver = false;
+                    fighter = new Fighter(100, 8, 12, new Rectangle(map.yPixel / 2, map.xPixel / 2, 125, 75), Content.Load<Texture2D>("fighter"));
+                    onGame = true;
+                }
 
                 _spriteBatch.Begin();
                 _spriteBatch.Draw(map.texture, new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), Color.White);
@@ -241,6 +248,7 @@ public class MoonFighter : Game
                 if (score.percentScoreLeft <= 0)
                 {
                     _gameState = GameState.GameOver;
+                    onGame = false;
                 }
 
                 _spriteBatch.Draw(score.textureLossLife, score.elementLossLife, score.color);
