@@ -17,7 +17,11 @@ public class Button
         this.colorBackground = colorBackground;
         this.rectangle = rectangle;
         this.texture2D = new Texture2D(graphicsDevice, 1, 1);
+<<<<<<< HEAD
         this.texture2D.SetData<Color>(new Color[] { Color.CornflowerBlue });
+=======
+        this.texture2D.SetData<Color>(new Color[] { Color.White });
+>>>>>>> 08f89efc304e58093ee5da8391d699f097c6b167
     }
     public Texture2D texture2D { get; set; }
     public int positionX { get; set; }

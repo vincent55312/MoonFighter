@@ -32,10 +32,14 @@ public class MoonFighter : Game
 
     protected override void Initialize()
     {
+<<<<<<< HEAD
         menu.Add(1, new Button(new Rectangle(Window.ClientBounds.Width/2, Window.ClientBounds.Height/4, 200, 50), Window.ClientBounds.Width / 2, Window.ClientBounds.Height / 4, GameState.Game, Color.AntiqueWhite, "Play", GraphicsDevice));
         menu.Add(2, new Button(new Rectangle(Window.ClientBounds.Width / 2, Window.ClientBounds.Height / 3, 200, 50), Window.ClientBounds.Width / 2, Window.ClientBounds.Height / 3, GameState.GameOver, Color.AntiqueWhite, "Reload", GraphicsDevice));
         menu.Add(3, new Button(new Rectangle(Window.ClientBounds.Width / 2, Window.ClientBounds.Height / 2, 200, 50), Window.ClientBounds.Width / 2, Window.ClientBounds.Height / 2, GameState.Score, Color.AntiqueWhite, "Score", GraphicsDevice));
         menu.Add(4, new Button(new Rectangle(Window.ClientBounds.Width / 2, Window.ClientBounds.Height / 1, 200, 50), Window.ClientBounds.Width / 2, Window.ClientBounds.Height / 1, GameState.Quit, Color.AntiqueWhite, "Quit", GraphicsDevice));
+=======
+        menu.Add(1, new Button(new Rectangle(0, 0, 200, 100), 50, 50, GameState.Game, Color.AntiqueWhite, "Play", GraphicsDevice));
+>>>>>>> 08f89efc304e58093ee5da8391d699f097c6b167
 
         map = new Map(1200, 720, 1, Content.Load<Texture2D>("background"));
         fighter = new Fighter(100, 8, 12, new Rectangle(map.yPixel/2, map.xPixel/2, 125, 75), Content.Load<Texture2D>("fighter"));
@@ -54,6 +58,7 @@ public class MoonFighter : Game
     }
     protected override void Update(GameTime gameTime)
     {
+<<<<<<< HEAD
 
         if ( _gameState == GameState.Quit)
         {
@@ -107,6 +112,52 @@ public class MoonFighter : Game
 
             foreach (Bullet instance in instancesBullet.Values)
             {
+=======
+        if (_gameState == GameState.Game)
+        {
+            nFrameUpdated++;
+            if (nFrameUpdated % 300 == 0)
+            {
+                boostSpeedBullets++;
+            }
+            if (nFrameUpdated % 120 == 0)
+            {
+                boostGeneration++;
+            }
+            if (nFrameUpdated % 600 == 0)
+            {
+                fighter.speed++;
+            }
+            if (nFrameUpdated % 500 == 0)
+            {
+                instancesBullet.Add(idBullet, new Bullet(2 + boostSpeedBullets, map, new SizeElement(600, 500), Content.Load<Texture2D>("doge"), false, false));
+                idBullet++;
+            }
+
+
+            Random rnd = new Random();
+            if (rnd.Next(0, 1000) < 10 + boostGeneration)
+            {
+                instancesBullet.Add(idBullet, new Bullet(1 + boostSpeedBullets, map, new SizeElement(30, 80), Content.Load<Texture2D>("meteor"), true));
+                idBullet++;
+            }
+
+            if (rnd.Next(0, 1000) < 5 + boostGeneration)
+            {
+                instancesBullet.Add(idBullet, new Bullet(1 + boostSpeedBullets*2, map, new SizeElement(30, 80), Content.Load<Texture2D>("rocket")));
+                idBullet++;
+            }
+
+            if (rnd.Next(0, 1000) < 1 + boostGeneration)
+            {
+                instancesBullet.Add(idBullet, new Bullet(1 + boostSpeedBullets*3, map, new SizeElement(120, 100), Content.Load<Texture2D>("alien")));
+                idBullet++;
+            }
+
+
+            foreach (Bullet instance in instancesBullet.Values)
+            {
+>>>>>>> 08f89efc304e58093ee5da8391d699f097c6b167
                 if (instance.mouvementIsVertial)
                 {
                     instance.element.Y += instance.speed;
