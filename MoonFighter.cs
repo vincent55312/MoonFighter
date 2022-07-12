@@ -24,9 +24,9 @@ public class MoonFighter : Game
     private int nFrameUpdated { get; set; } = 0;
     private int nDrawUpdated { get; set; } = 0;
     private bool onGameOver { get; set; } = false;
-    private bool onGame { get; set; } = false;
-
     private int maxEntityGeneration { get; set; } = 80;
+
+    private bool enterOnGame { get; set; } = true;
 
     private GameState _gameState { get; set; } = GameState.MainMenu;
 
@@ -39,7 +39,7 @@ public class MoonFighter : Game
 
     protected override void Initialize()
     {
-        menu.Add(new Button(new Rectangle(450, Window.ClientBounds.Height/4, 200, 50), 450, Window.ClientBounds.Height / 4, GameState.Game, Color.AntiqueWhite, "Play", GraphicsDevice));
+        menu.Add(new Button(new Rectangle(450, Window.ClientBounds.Height / 4, 200, 50), 450, Window.ClientBounds.Height / 4, GameState.Game, Color.AntiqueWhite, "Play", GraphicsDevice));
         menu.Add(new Button(new Rectangle(450, Window.ClientBounds.Height / 3, 200, 50), 450, Window.ClientBounds.Height / 3, GameState.GameOver, Color.AntiqueWhite, "Reload", GraphicsDevice));
         menu.Add(new Button(new Rectangle(450, Window.ClientBounds.Height / 2, 200, 50), 450, Window.ClientBounds.Height / 2, GameState.Score, Color.AntiqueWhite, "Score", GraphicsDevice));
         menu.Add(new Button(new Rectangle(450, Window.ClientBounds.Height / 1, 200, 50), 450, Window.ClientBounds.Height / 1, GameState.Quit, Color.AntiqueWhite, "Quit", GraphicsDevice));
@@ -51,7 +51,7 @@ public class MoonFighter : Game
         _graphics.PreferredBackBufferHeight = map.xPixel;
         _graphics.ApplyChanges();
         base.Initialize();
-    }   
+    }
 
     protected override void LoadContent()
     {
@@ -61,7 +61,7 @@ public class MoonFighter : Game
     }
     protected override void Update(GameTime gameTime)
     {
-        if ( _gameState == GameState.Quit)
+        if (_gameState == GameState.Quit)
         {
             Exit();
         }
@@ -119,7 +119,8 @@ public class MoonFighter : Game
                 if (instance.mouvementIsVertial)
                 {
                     instance.element.Y += instance.speed;
-                } else
+                }
+                else
                 {
                     instance.element.X += instance.speed;
                 }
@@ -204,22 +205,21 @@ public class MoonFighter : Game
                 break;
 
             case GameState.Game:
-                if (onGame == false)
+                if (enterOnGame)
                 {
+                    nDrawUpdated = 0;
                     fighter.speed = 8;
                     fighter.jump = 12;
                     fighter.health = 100;
                     nFrameUpdated = 0;
-                    nDrawUpdated = 0;
                     lossLife = 0;
                     idBullet = 0;
                     boostGeneration = 0;
                     boostSpeedBullets = 0;
                     onGameOver = false;
-                    fighter = new Fighter(100, 8, 12, new Rectangle(map.yPixel / 2, map.xPixel / 2, 125, 75), Content.Load<Texture2D>("fighter"));
-                    onGame = true;
+                    enterOnGame = false;
+                    instancesBullet.Clear();
                 }
-
                 _spriteBatch.Begin();
                 _spriteBatch.Draw(map.texture, new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), Color.White);
                 _spriteBatch.Draw(fighter.texture, fighter.element, Color.White);
@@ -248,7 +248,7 @@ public class MoonFighter : Game
                 if (score.percentScoreLeft <= 0)
                 {
                     _gameState = GameState.GameOver;
-                    onGame = false;
+                    onGameOver = false;
                 }
 
                 _spriteBatch.Draw(score.textureLossLife, score.elementLossLife, score.color);
@@ -261,12 +261,13 @@ public class MoonFighter : Game
                 _spriteBatch.Begin();
                 _spriteBatch.Draw(map.texture, new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), Color.Red);
                 _spriteBatch.Draw(background, new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), Color.Red);
-                
+
                 int numberBase = 0;
                 if (onGameOver == false)
                 {
                     numberBase = nDrawUpdated;
                     onGameOver = true;
+                    enterOnGame = true;
                 }
 
                 if (nDrawUpdated > (450 + numberBase))
