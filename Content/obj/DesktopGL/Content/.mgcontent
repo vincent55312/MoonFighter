@@ -4,17 +4,27 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/vincentv/Desktop/Cours/Dev/MoonFighter/Content/alien.png</File>
-    <File>C:/Users/vincentv/Desktop/Cours/Dev/MoonFighter/Content/background.jpg</File>
-    <File>C:/Users/vincentv/Desktop/Cours/Dev/MoonFighter/Content/doge.png</File>
-    <File>C:/Users/vincentv/Desktop/Cours/Dev/MoonFighter/Content/fighter.png</File>
-    <File>C:/Users/vincentv/Desktop/Cours/Dev/MoonFighter/Content/File.spritefont</File>
-    <File>C:/Users/vincentv/Desktop/Cours/Dev/MoonFighter/Content/gameOver.png</File>
-    <File>C:/Users/vincentv/Desktop/Cours/Dev/MoonFighter/Content/meteor.png</File>
-    <File>C:/Users/vincentv/Desktop/Cours/Dev/MoonFighter/Content/music.mp3</File>
-    <File>C:/Users/vincentv/Desktop/Cours/Dev/MoonFighter/Content/rocket.png</File>
+    <File>C:/Users/Dylan/Desktop/MoonFighter/MoonFighter/Content/../../../commands.png</File>
+    <File>C:/Users/Dylan/Desktop/MoonFighter/MoonFighter/Content/alien.png</File>
+    <File>C:/Users/Dylan/Desktop/MoonFighter/MoonFighter/Content/background.jpg</File>
+    <File>C:/Users/Dylan/Desktop/MoonFighter/MoonFighter/Content/commands.png</File>
+    <File>C:/Users/Dylan/Desktop/MoonFighter/MoonFighter/Content/doge.png</File>
+    <File>C:/Users/Dylan/Desktop/MoonFighter/MoonFighter/Content/fighter.png</File>
+    <File>C:/Users/Dylan/Desktop/MoonFighter/MoonFighter/Content/File.spritefont</File>
+    <File>C:/Users/Dylan/Desktop/MoonFighter/MoonFighter/Content/gameOver.png</File>
+    <File>C:/Users/Dylan/Desktop/MoonFighter/MoonFighter/Content/meteor.png</File>
+    <File>C:/Users/Dylan/Desktop/MoonFighter/MoonFighter/Content/music.mp3</File>
+    <File>C:/Users/Dylan/Desktop/MoonFighter/MoonFighter/Content/podium.png</File>
+    <File>C:/Users/Dylan/Desktop/MoonFighter/MoonFighter/Content/rocket.png</File>
+    <File>C:/Users/Dylan/Desktop/MoonFighter/MoonFighter/Content/score.spritefont</File>
+    <File>C:/Users/Dylan/Desktop/MoonFighter/MoonFighter/Content/scoreLittle.spritefont</File>
   </SourceFiles>
   <DestFiles>
+    <File>commands.png</File>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

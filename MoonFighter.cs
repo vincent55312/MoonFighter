@@ -6,16 +6,22 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
+using System.Linq;
 
 public class MoonFighter : Game
 {
+    private SpriteFont font { get; set; }
+    private SpriteFont fontLittle { get; set; }
     private GraphicsDeviceManager _graphics { get; set; }
     private SpriteBatch _spriteBatch { get; set; }
     private Texture2D background { get; set; }
+    private Texture2D podium { get; set; }
+    private Texture2D commands { get; set; }
     private Map map { get; set; }
     private Fighter fighter { get; set; }
     private List<Bullet> instancesBullet { get; set; } = new List<Bullet>();
     private List<Button> menu { get; set; } = new List<Button>();
+    private List<int> scores { get; set; } = new List<int>() { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
     private int idBullet { get; set; } = 0;
     private int lossLife { get; set; } = 0;
@@ -39,14 +45,19 @@ public class MoonFighter : Game
 
     protected override void Initialize()
     {
-        menu.Add(new Button(new Rectangle(450, Window.ClientBounds.Height / 4, 200, 50), 450, Window.ClientBounds.Height / 4, GameState.Game, Color.AntiqueWhite, "Play", GraphicsDevice));
-        menu.Add(new Button(new Rectangle(450, Window.ClientBounds.Height / 3, 200, 50), 450, Window.ClientBounds.Height / 3, GameState.GameOver, Color.AntiqueWhite, "Reload", GraphicsDevice));
-        menu.Add(new Button(new Rectangle(450, Window.ClientBounds.Height / 2, 200, 50), 450, Window.ClientBounds.Height / 2, GameState.Score, Color.AntiqueWhite, "Score", GraphicsDevice));
-        menu.Add(new Button(new Rectangle(450, Window.ClientBounds.Height / 1, 200, 50), 450, Window.ClientBounds.Height / 1, GameState.Quit, Color.AntiqueWhite, "Quit", GraphicsDevice));
+        menu.Add(new Button(new Rectangle(490, 130, 220, 60), 490, 130, GameState.Game, Color.Gold, "Play", GraphicsDevice));
+        menu.Add(new Button(new Rectangle(490, 230, 220, 60), 490, 230, GameState.GameOver, Color.Gold, "Reload", GraphicsDevice));
+        menu.Add(new Button(new Rectangle(490, 330, 220, 60), 490, 330, GameState.Story, Color.Gold, "Story", GraphicsDevice));
+        menu.Add(new Button(new Rectangle(490, 430, 220, 60), 490, 430, GameState.howPlay, Color.Gold, "How to Play", GraphicsDevice));
+        menu.Add(new Button(new Rectangle(490, 530, 220, 60), 490, 530, GameState.Quit, Color.Gold, "Quit", GraphicsDevice));
 
         map = new Map(1200, 720, 1, Content.Load<Texture2D>("background"));
         fighter = new Fighter(100, 8, 12, new Rectangle(map.yPixel / 2, map.xPixel / 2, 125, 75), Content.Load<Texture2D>("fighter"));
         background = Content.Load<Texture2D>("gameOver");
+        podium = Content.Load<Texture2D>("podium");
+        commands = Content.Load<Texture2D>("commands");
+        font = Content.Load<SpriteFont>("Score");
+        fontLittle = Content.Load<SpriteFont>("ScoreLittle");
         _graphics.PreferredBackBufferWidth = map.yPixel;
         _graphics.PreferredBackBufferHeight = map.xPixel;
         _graphics.ApplyChanges();
@@ -185,7 +196,7 @@ public class MoonFighter : Game
 
                 _spriteBatch.Begin();
                 _spriteBatch.Draw(map.texture, new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), Color.White);
-
+                _spriteBatch.DrawString(fontLittle, "MoonFighter", new Vector2(400, 40), Color.Gold);
                 menu.ForEach(delegate (Button button)
                 {
                     _spriteBatch.Draw(button.texture2D, new Vector2(button.positionX, button.positionY),
@@ -248,10 +259,10 @@ public class MoonFighter : Game
 
                 if (score.percentScoreLeft <= 0)
                 {
+                    scores.Add(score.score);
                     _gameState = GameState.GameOver;
                     onGameOver = false;
                 }
-
                 _spriteBatch.Draw(score.textureLossLife, score.elementLossLife, score.color);
                 _spriteBatch.Draw(score.textureScore, score.elementScore, Color.White * 0.9f);
                 _spriteBatch.DrawString(Content.Load<SpriteFont>("File"), score.getScore(), new Vector2(1100, 50), Color.Black);
@@ -282,6 +293,28 @@ public class MoonFighter : Game
             case GameState.Score:
                 _spriteBatch.Begin();
                 _spriteBatch.Draw(map.texture, new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), Color.White);
+                _spriteBatch.Draw(podium, new Rectangle(50, 420, 1000, 300), Color.White);
+
+
+                scores.Sort();
+                scores.Reverse();
+                _spriteBatch.DrawString(font, scores.Max().ToString(), new Vector2(480, 280), Color.Gold);
+                _spriteBatch.DrawString(font, scores[1].ToString(), new Vector2(180, 380), Color.Gold);
+                _spriteBatch.DrawString(font, scores[2].ToString(), new Vector2(800, 420), Color.Gold);
+
+                _spriteBatch.DrawString(fontLittle, scores[3].ToString(), new Vector2(1100, 20), Color.White);
+                _spriteBatch.DrawString(fontLittle, scores[4].ToString(), new Vector2(1100, 120), Color.White);
+                _spriteBatch.DrawString(fontLittle, scores[5].ToString(), new Vector2(1100, 220), Color.White);
+                _spriteBatch.DrawString(fontLittle, scores[6].ToString(), new Vector2(1100, 320), Color.White);
+                _spriteBatch.DrawString(fontLittle, scores[7].ToString(), new Vector2(1100, 420), Color.White);
+                _spriteBatch.DrawString(fontLittle, scores[8].ToString(), new Vector2(1100, 520), Color.White);
+                _spriteBatch.DrawString(fontLittle, scores[9].ToString(), new Vector2(1100, 620), Color.White);
+
+                if (Keyboard.GetState().IsKeyDown(Keys.M))
+                {
+                    _gameState = GameState.MainMenu;
+                }
+
                 _spriteBatch.End();
 
                 break;
