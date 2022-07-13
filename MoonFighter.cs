@@ -296,6 +296,7 @@ namespace MoonFighter
                     if (_score.PercentScoreLeft <= 0)
                     {
                         _scores.Add(_score.scoreNumber);
+                        Score.Save(_scores);
                         _gameState = GameState.GameOver;
                     }
                     _spriteBatch.Draw(_score.TextureLossLife, _score.ElementLossLife, _score.Color);
@@ -322,6 +323,7 @@ namespace MoonFighter
                     _spriteBatch.End();
                     break;
                 case GameState.Score:
+                    _scores = Score.GetAllScores();
                     _spriteBatch.Begin();
                     _spriteBatch.Draw(_chunk.Texture, new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), Color.White);
                     _spriteBatch.Draw(_podium, new Rectangle(50, 420, 1000, 300), Color.White);

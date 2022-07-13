@@ -1,5 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text.Json;
 
 namespace MoonFighter
 {
@@ -16,10 +20,31 @@ namespace MoonFighter
         public Rectangle ElementScore { get; set; }
         private int BaseLife { get; } = 800;
 
+        public static void Save(List<int> memoryScores)
+        {
+            string fileName = "Scores.json";
+            string pathFolder = Path.Combine(Environment.CurrentDirectory, @"prod_data");
+            string path = pathFolder + '/' + fileName;
+            File.WriteAllText(path, JsonSerializer.Serialize(memoryScores));
+        }
+
+        public static List<int> GetAllScores()
+        {
+            string fileName = "Scores.json";
+            string pathFolder = Path.Combine(Environment.CurrentDirectory, @"prod_data");
+            string path = pathFolder + '/' + fileName;
+
+            string json = File.ReadAllText(path);
+            return JsonSerializer.Deserialize<List<int>>(json);
+        }
+
+
         public string GetScore()
         {
             return scoreNumber.ToString();
         }
+
+
 
         public Score(GraphicsDevice graphicsDevice, int lossLife, int nFrames) : base(graphicsDevice)
         {
