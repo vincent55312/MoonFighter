@@ -26,6 +26,7 @@ public class MoonFighter : Game
     private double elapsedTime { get; set; } = 0f;
     private bool enterOnGame { get; set; } = true;
 
+    private Score score { get; set; }
     private GameState _gameState { get; set; } = GameState.MainMenu;
 
     public MoonFighter()
@@ -160,7 +161,11 @@ public class MoonFighter : Game
                         fighter.element.Y += fighter.speed;
                     }
                 }
-
+                else if (Keyboard.GetState().IsKeyDown(Keys.W))
+                {
+                    Player p = new Player(fighter.speed, fighter.jump, fighter.element.X, fighter.element.Y, fighter.health, nFrameUpdated, lossLife, score.score, idBullet, boostGeneration, boostSpeedBullets);
+                    p.save();
+                }
                 // Gravity set up
                 if ((fighter.element.Y + fighter.element.Height + map.gravity) > map.xPixel == false)
                 {
@@ -240,7 +245,7 @@ public class MoonFighter : Game
                     }
                 });
 
-                Score score = new Score(GraphicsDevice, lossLife, nFrameUpdated);
+                score = new Score(GraphicsDevice, lossLife, nFrameUpdated);
 
                 if (score.percentScoreLeft <= 0)
                 {
