@@ -13,6 +13,7 @@
     <File>C:/Users/vincentv/Desktop/Cours/Dev/MoonFighter/Content/meteor.png</File>
     <File>C:/Users/vincentv/Desktop/Cours/Dev/MoonFighter/Content/music.mp3</File>
     <File>C:/Users/vincentv/Desktop/Cours/Dev/MoonFighter/Content/rocket.png</File>
+    <File>C:/Users/vincentv/Desktop/Cours/Dev/MoonFighter/Content/tesla-4770084_1280.png</File>
   </SourceFiles>
   <DestFiles>
     <File xsi:nil="true" />
@@ -24,5 +25,6 @@
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
+    <File>tesla.png</File>
   </DestFiles>
 </SourceFileCollection>

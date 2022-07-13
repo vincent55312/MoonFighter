@@ -69,10 +69,6 @@ public class MoonFighter : Game
         }
         if (_gameState == GameState.Game)
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.M))
-            {
-                _gameState = GameState.MainMenu;
-            }
             nFrameUpdated++;
             if (nFrameUpdated % 300 == 0)
             {
@@ -111,6 +107,12 @@ public class MoonFighter : Game
                 if (rnd.Next(0, 1000) < 1 + boostGeneration)
                 {
                     instancesBullet.Add(new Bullet(2 + boostSpeedBullets * 2, map, new SizeElement(300, 225), Content.Load<Texture2D>("doge"), false, false));
+                    idBullet++;
+                }
+
+                if (rnd.Next(0, 1500) < 1 + boostGeneration)
+                {
+                    instancesBullet.Add(new Bullet(2 + boostSpeedBullets * 3, map, new SizeElement(400, 225), Content.Load<Texture2D>("tesla"), false, false));
                     idBullet++;
                 }
             }
@@ -261,12 +263,12 @@ public class MoonFighter : Game
 
                     if (instance.element.Y > map.xPixel)
                     {
-                        instance.element.Y -= map.yPixel * 2;
+                        instance.element.Y -= map.yPixel * 5;
                     }
 
                     if (instance.element.X > map.yPixel)
                     {
-                        instance.element.X -= map.yPixel * 2;
+                        instance.element.X -= map.yPixel * 5;
                     }
                 });
 
