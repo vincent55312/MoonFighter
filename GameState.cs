@@ -3,7 +3,9 @@
     MainMenu,
     Game,
     GameOver,
+    Story,
+    howPlay,
     Score,
     Reload,
-    Quit,
+    Quit
 }

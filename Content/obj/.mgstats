@@ -1,2 +1,3 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"C:/Users/vincentv/Desktop/Cours/Dev/MoonFighter/Content/tesla-4770084_1280.png","C:/Users/vincentv/Desktop/Cours/Dev/MoonFighter/Content/bin/tesla.xnb","TextureProcessor","Texture2DContent",135819,3276885,0,2281566
+"C:/Users/vincentv/Desktop/Cours/Dev/MoonFighter/Content/score.spritefont","C:/Users/vincentv/Desktop/Cours/Dev/MoonFighter/Content/bin/score.xnb","FontDescriptionProcessor","SpriteFontContent",2008,21538,0,179964
+"C:/Users/vincentv/Desktop/Cours/Dev/MoonFighter/Content/scoreLittle.spritefont","C:/Users/vincentv/Desktop/Cours/Dev/MoonFighter/Content/bin/scoreLittle.xnb","FontDescriptionProcessor","SpriteFontContent",2008,21538,0,0155053

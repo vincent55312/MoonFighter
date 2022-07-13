@@ -6,16 +6,28 @@
   <SourceFiles>
     <File>C:/Users/vincentv/Desktop/Cours/Dev/MoonFighter/Content/alien.png</File>
     <File>C:/Users/vincentv/Desktop/Cours/Dev/MoonFighter/Content/background.jpg</File>
+    <File>C:/Users/vincentv/Desktop/Cours/Dev/MoonFighter/Content/commands.png</File>
+    <File>C:/Users/vincentv/Desktop/Cours/Dev/MoonFighter/Content/commands2.png</File>
     <File>C:/Users/vincentv/Desktop/Cours/Dev/MoonFighter/Content/doge.png</File>
     <File>C:/Users/vincentv/Desktop/Cours/Dev/MoonFighter/Content/fighter.png</File>
     <File>C:/Users/vincentv/Desktop/Cours/Dev/MoonFighter/Content/File.spritefont</File>
     <File>C:/Users/vincentv/Desktop/Cours/Dev/MoonFighter/Content/gameOver.png</File>
     <File>C:/Users/vincentv/Desktop/Cours/Dev/MoonFighter/Content/meteor.png</File>
     <File>C:/Users/vincentv/Desktop/Cours/Dev/MoonFighter/Content/music.mp3</File>
+    <File>C:/Users/vincentv/Desktop/Cours/Dev/MoonFighter/Content/podium.png</File>
     <File>C:/Users/vincentv/Desktop/Cours/Dev/MoonFighter/Content/rocket.png</File>
+    <File>C:/Users/vincentv/Desktop/Cours/Dev/MoonFighter/Content/score.spritefont</File>
+    <File>C:/Users/vincentv/Desktop/Cours/Dev/MoonFighter/Content/scoreLittle.spritefont</File>
+    <File>C:/Users/vincentv/Desktop/Cours/Dev/MoonFighter/Content/story.png</File>
     <File>C:/Users/vincentv/Desktop/Cours/Dev/MoonFighter/Content/tesla-4770084_1280.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
