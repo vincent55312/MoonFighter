@@ -5,6 +5,7 @@
   <Config />
   <SourceFiles>
     <File>C:/Users/Dylan/Desktop/MoonFighter/MoonFighter/Content/../../../commands.png</File>
+    <File>C:/Users/Dylan/Desktop/MoonFighter/MoonFighter/Content/../../../commands2.png</File>
     <File>C:/Users/Dylan/Desktop/MoonFighter/MoonFighter/Content/alien.png</File>
     <File>C:/Users/Dylan/Desktop/MoonFighter/MoonFighter/Content/background.jpg</File>
     <File>C:/Users/Dylan/Desktop/MoonFighter/MoonFighter/Content/commands.png</File>
@@ -18,9 +19,12 @@
     <File>C:/Users/Dylan/Desktop/MoonFighter/MoonFighter/Content/rocket.png</File>
     <File>C:/Users/Dylan/Desktop/MoonFighter/MoonFighter/Content/score.spritefont</File>
     <File>C:/Users/Dylan/Desktop/MoonFighter/MoonFighter/Content/scoreLittle.spritefont</File>
+    <File>C:/Users/Dylan/Desktop/MoonFighter/MoonFighter/Content/story.png</File>
   </SourceFiles>
   <DestFiles>
     <File>commands.png</File>
+    <File>commands2.png</File>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

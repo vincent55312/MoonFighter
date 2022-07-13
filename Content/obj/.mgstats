@@ -1,4 +1,4 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"C:/Users/Dylan/Desktop/MoonFighter/MoonFighter/Content/../../../commands.png","C:/Users/Dylan/Desktop/MoonFighter/MoonFighter/Content/bin/commands.xnb","TextureProcessor","Texture2DContent",24945,5242965,0,9304799
-"C:/Users/Dylan/Desktop/MoonFighter/MoonFighter/Content/commands.png","C:/Users/Dylan/Desktop/MoonFighter/MoonFighter/Content/bin/commands.xnb","TextureProcessor","Texture2DContent",24945,5242965,0,2220933
-"C:/Users/Dylan/Desktop/MoonFighter/MoonFighter/Content/scoreLittle.spritefont","C:/Users/Dylan/Desktop/MoonFighter/MoonFighter/Content/bin/scoreLittle.xnb","FontDescriptionProcessor","SpriteFontContent",2008,267298,0,1924544
+"C:/Users/Dylan/Desktop/MoonFighter/MoonFighter/Content/../../../commands.png","C:/Users/Dylan/Desktop/MoonFighter/MoonFighter/Content/bin/commands.xnb","TextureProcessor","Texture2DContent",24945,5242965,0,342238
+"C:/Users/Dylan/Desktop/MoonFighter/MoonFighter/Content/commands.png","C:/Users/Dylan/Desktop/MoonFighter/MoonFighter/Content/bin/commands.xnb","TextureProcessor","Texture2DContent",24945,5242965,0,1644127
+"C:/Users/Dylan/Desktop/MoonFighter/MoonFighter/Content/story.png","C:/Users/Dylan/Desktop/MoonFighter/MoonFighter/Content/bin/story.xnb","TextureProcessor","Texture2DContent",57801,5242965,0,1542519

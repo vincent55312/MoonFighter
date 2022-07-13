@@ -17,6 +17,8 @@ public class MoonFighter : Game
     private Texture2D background { get; set; }
     private Texture2D podium { get; set; }
     private Texture2D commands { get; set; }
+    private Texture2D commands2 { get; set; }
+    private Texture2D story { get; set; }
     private Map map { get; set; }
     private Fighter fighter { get; set; }
     private List<Bullet> instancesBullet { get; set; } = new List<Bullet>();
@@ -49,13 +51,16 @@ public class MoonFighter : Game
         menu.Add(new Button(new Rectangle(490, 230, 220, 60), 490, 230, GameState.GameOver, Color.Gold, "Reload", GraphicsDevice));
         menu.Add(new Button(new Rectangle(490, 330, 220, 60), 490, 330, GameState.Story, Color.Gold, "Story", GraphicsDevice));
         menu.Add(new Button(new Rectangle(490, 430, 220, 60), 490, 430, GameState.howPlay, Color.Gold, "How to Play", GraphicsDevice));
-        menu.Add(new Button(new Rectangle(490, 530, 220, 60), 490, 530, GameState.Quit, Color.Gold, "Quit", GraphicsDevice));
+        menu.Add(new Button(new Rectangle(490, 530, 220, 60), 490, 530, GameState.Score, Color.Gold, "Score", GraphicsDevice));
+        menu.Add(new Button(new Rectangle(490, 630, 220, 60), 490, 630, GameState.Quit, Color.Gold, "Quit", GraphicsDevice));
 
         map = new Map(1200, 720, 1, Content.Load<Texture2D>("background"));
         fighter = new Fighter(100, 8, 12, new Rectangle(map.yPixel / 2, map.xPixel / 2, 125, 75), Content.Load<Texture2D>("fighter"));
         background = Content.Load<Texture2D>("gameOver");
         podium = Content.Load<Texture2D>("podium");
         commands = Content.Load<Texture2D>("commands");
+        commands2 = Content.Load<Texture2D>("commands2");
+        story = Content.Load<Texture2D>("story");
         font = Content.Load<SpriteFont>("Score");
         fontLittle = Content.Load<SpriteFont>("ScoreLittle");
         _graphics.PreferredBackBufferWidth = map.yPixel;
@@ -309,6 +314,35 @@ public class MoonFighter : Game
                 _spriteBatch.DrawString(fontLittle, scores[7].ToString(), new Vector2(1100, 420), Color.White);
                 _spriteBatch.DrawString(fontLittle, scores[8].ToString(), new Vector2(1100, 520), Color.White);
                 _spriteBatch.DrawString(fontLittle, scores[9].ToString(), new Vector2(1100, 620), Color.White);
+
+                if (Keyboard.GetState().IsKeyDown(Keys.M))
+                {
+                    _gameState = GameState.MainMenu;
+                }
+
+                _spriteBatch.End();
+
+                break;
+            case GameState.howPlay:
+                _spriteBatch.Begin();
+                _spriteBatch.Draw(map.texture, new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), Color.Gray);
+                _spriteBatch.Draw(commands, new Rectangle(0, 0, 1200, 900), Color.White);
+                _spriteBatch.Draw(commands2, new Rectangle(0, 440, 1200, 900), Color.White);
+
+
+                if (Keyboard.GetState().IsKeyDown(Keys.M))
+                {
+                    _gameState = GameState.MainMenu;
+                }
+
+                _spriteBatch.End();
+
+                break;
+            case GameState.Story:
+                _spriteBatch.Begin();
+                _spriteBatch.Draw(map.texture, new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), Color.Gray);
+                _spriteBatch.DrawString(fontLittle, "MoonFighter", new Vector2(400, 40), Color.Gold);
+                _spriteBatch.Draw(story, new Rectangle(100, 80, 1000, 700), Color.White);
 
                 if (Keyboard.GetState().IsKeyDown(Keys.M))
                 {
