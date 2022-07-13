@@ -43,11 +43,6 @@ public class MoonFighter : Game
 
     protected override void Initialize()
     {
-        bool saveIsExisting = Player.saveIsExisting();
-        if (saveIsExisting)
-        {
-            menu.Add(new Button(new Rectangle(490, 230, 220, 60), 490, 230, GameState.Reload, Color.Gold, "Reload", GraphicsDevice));
-        }
         menu.Add(new Button(new Rectangle(490, 130, 220, 60), 490, 130, GameState.Game, Color.Gold, "Play", GraphicsDevice));
         menu.Add(new Button(new Rectangle(490, 330, 220, 60), 490, 330, GameState.Story, Color.Gold, "Story", GraphicsDevice));
         menu.Add(new Button(new Rectangle(490, 430, 220, 60), 490, 430, GameState.howPlay, Color.Gold, "How to Play", GraphicsDevice));
@@ -201,6 +196,12 @@ public class MoonFighter : Game
         switch (_gameState)
         {
             case GameState.MainMenu:
+                bool saveIsExisting = Player.saveIsExisting();
+                if (saveIsExisting)
+                {
+                    menu.Add(new Button(new Rectangle(490, 230, 220, 60), 490, 230, GameState.Reload, Color.Gold, "Reload", GraphicsDevice));
+                }
+
                 MouseState mouse = Mouse.GetState();
                 var mousePosition = new Point(mouse.X, mouse.Y);
 
