@@ -21,11 +21,10 @@ public class MoonFighter : Game
     private int boostSpeedBullets { get; set; } = 0;
     private int boostGeneration { get; set; } = 0;
     private int nFrameUpdated { get; set; } = 0;
-    private bool onGameOver { get; set; } = false;
     private int maxEntityGeneration { get; set; } = 80;
     private double elapsedTime { get; set; } = 0f;
-    private bool enterOnGame { get; set; } = true;
-
+    private bool isEnterOnGame { get; set; } = true;
+    private bool isEnterOnSave { get; set; } = false;
     private Score score { get; set; }
     private GameState _gameState { get; set; } = GameState.MainMenu;
 
@@ -38,8 +37,12 @@ public class MoonFighter : Game
 
     protected override void Initialize()
     {
+        bool saveIsExisting = Player.saveIsExisting();
+        if (saveIsExisting)
+        {
+            menu.Add(new Button(new Rectangle(450, Window.ClientBounds.Height / 3, 200, 50), 450, Window.ClientBounds.Height / 3, GameState.Reload, Color.AntiqueWhite, "Reload", GraphicsDevice));
+        }
         menu.Add(new Button(new Rectangle(450, Window.ClientBounds.Height / 4, 200, 50), 450, Window.ClientBounds.Height / 4, GameState.Game, Color.AntiqueWhite, "Play", GraphicsDevice));
-        menu.Add(new Button(new Rectangle(450, Window.ClientBounds.Height / 3, 200, 50), 450, Window.ClientBounds.Height / 3, GameState.GameOver, Color.AntiqueWhite, "Reload", GraphicsDevice));
         menu.Add(new Button(new Rectangle(450, Window.ClientBounds.Height / 2, 200, 50), 450, Window.ClientBounds.Height / 2, GameState.Score, Color.AntiqueWhite, "Score", GraphicsDevice));
         menu.Add(new Button(new Rectangle(450, Window.ClientBounds.Height / 1, 200, 50), 450, Window.ClientBounds.Height / 1, GameState.Quit, Color.AntiqueWhite, "Quit", GraphicsDevice));
 
@@ -205,9 +208,13 @@ public class MoonFighter : Game
 
                 _spriteBatch.End();
                 break;
-
+            case GameState.Reload:
+                isEnterOnGame = false;
+                isEnterOnSave = true;
+                _gameState = GameState.Game;
+                break;
             case GameState.Game:
-                if (enterOnGame)
+                if (isEnterOnGame)
                 {
                     fighter.speed = 8;
                     fighter.jump = 12;
@@ -218,10 +225,28 @@ public class MoonFighter : Game
                     idBullet = 0;
                     boostGeneration = 0;
                     boostSpeedBullets = 0;
-                    enterOnGame = false;
+                    isEnterOnGame = false;
                     instancesBullet.Clear();
                     elapsedTime = 0;
                 }
+
+                if (isEnterOnSave)
+                {
+                    Player p = Player.getFromSave();
+                    fighter.speed = p.fighterSpeed;
+                    fighter.jump = p.fighterJump;
+                    fighter.element = new Rectangle(p.fighterXposition, p.fighterYposition, 125, 75);
+                    fighter.health = p.fighterHealth;
+                    nFrameUpdated = p.nFramedUpdated;
+                    lossLife = p.lossLife;
+                    idBullet = p.idBullet;
+                    boostGeneration = p.boostGeneration;
+                    boostSpeedBullets = p.boostSpeedOnBullets;
+                    isEnterOnSave = false;
+                    instancesBullet.Clear();
+                    elapsedTime = 0;
+                }
+
                 _spriteBatch.Begin();
                 _spriteBatch.Draw(map.texture, new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), Color.White);
                 _spriteBatch.Draw(fighter.texture, fighter.element, Color.White);
@@ -269,7 +294,7 @@ public class MoonFighter : Game
                 if (elapsedTime >= 2000)
                 {
                     elapsedTime = 0;
-                    enterOnGame = true;
+                    isEnterOnGame = true;
                     _gameState = GameState.MainMenu;
                 }
 

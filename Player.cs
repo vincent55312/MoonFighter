@@ -1,11 +1,12 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Text.Json;
+using static System.Net.Mime.MediaTypeNames;
 
 public class Player: SerializableElement
 {
     public int fighterSpeed { get; set; }
     public int fighterJump { get; set; }
-
     public int fighterXposition { get; set; }
     public int fighterYposition { get; set; }
     public int fighterHealth { get; set; }
@@ -33,15 +34,44 @@ public class Player: SerializableElement
     }
 
     public Player(){}
+
+    public string getPath()
+    {
+        string fileName = "save.json";
+        string pathFolder = Path.Combine(Environment.CurrentDirectory, @"prod_data");
+        Directory.CreateDirectory(pathFolder);
+
+        return pathFolder + '/' + fileName;
+    }
     
     public void save()
     {
-        File.WriteAllText(@"./save.json", JsonSerializer.Serialize(this));
+        File.WriteAllText(getPath(), JsonSerializer.Serialize(this));
     }
 
-    public object getFromSave()
+    public static Player getFromSave()
     {
-        string json = File.ReadAllText(@"./save.json");
+        string fileName = "save.json";
+        string pathFolder = Path.Combine(Environment.CurrentDirectory, @"prod_data");
+        string path = pathFolder + '/' + fileName;
+
+        string json = File.ReadAllText(path);
         return JsonSerializer.Deserialize<Player>(json);
+    }
+
+    public static bool saveIsExisting()
+    {
+        try
+        {
+            string fileName = "save.json";
+            string pathFolder = Path.Combine(Environment.CurrentDirectory, @"prod_data");
+            string path = pathFolder + '/' + fileName;
+            
+            return File.Exists(path) ? true : false;
+        }
+        catch
+        {
+            return false;
+        }
     }
 }

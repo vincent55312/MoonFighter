@@ -5,5 +5,4 @@ using System.Text;
 interface SerializableElement
 {
     public void save();
-    public object getFromSave();
 }

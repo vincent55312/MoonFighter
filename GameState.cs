@@ -4,5 +4,6 @@
     Game,
     GameOver,
     Score,
-    Quit
+    Reload,
+    Quit,
 }
