@@ -1,13 +1,14 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
+﻿using Microsoft.Xna.Framework.Graphics;
 
-public class GraphicElement
+namespace MoonFighter
 {
-    public GraphicsDevice graphicsDevice { get; set; }
-
-    public GraphicElement(GraphicsDevice graphicsDevice)
+    public abstract class GraphicElement
     {
-        this.graphicsDevice = graphicsDevice;
+        public GraphicsDevice GraphicsDevice { get; set; }
+
+        public GraphicElement(GraphicsDevice graphicsDevice)
+        {
+            this.GraphicsDevice = graphicsDevice;
+        }
     }
 }

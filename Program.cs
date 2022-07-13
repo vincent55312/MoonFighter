@@ -1,11 +1,14 @@
 ﻿using System;
 
-public static class Program
+namespace MoonFighter
 {
-    [STAThread]
-    static void Main()
+    public static class Program
     {
-        using (var game = new MoonFighter())
-            game.Run();
+        [STAThread]
+        static void Main()
+        {
+            using (var game = new MoonFighter())
+                game.Run();
+        }
     }
 }

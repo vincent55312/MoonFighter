@@ -1,11 +1,14 @@
-﻿public enum GameState
+﻿namespace MoonFighter
 {
-    MainMenu,
-    Game,
-    GameOver,
-    Story,
-    howPlay,
-    Score,
-    Reload,
-    Quit
+    public enum GameState
+    {
+        MainMenu,
+        Game,
+        GameOver,
+        Story,
+        howPlay,
+        Score,
+        Reload,
+        Quit
+    }
 }

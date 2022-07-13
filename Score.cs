@@ -1,58 +1,57 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using System;
-using System.Diagnostics;
 
-public class Score: GraphicElement
+namespace MoonFighter
 {
-    public Texture2D textureLossLife { get; set; }
-    public Rectangle elementLossLife { get; set; }
-    public float lossLifePercent { get; set; }
-    public int score { get; set; }
-    public Color color { get; set; }
-    public int nRockets { get; set; }
-    public float percentScoreLeft { get; set; }
-
-    public Texture2D textureScore { get; set; }
-    public Rectangle elementScore { get; set; }
-    private int baseLife { get; } = 800;
-
-    public string getScore()
+    public class Score : GraphicElement
     {
-        return this.score.ToString();
-    }
+        public Texture2D TextureLossLife { get; set; }
+        public Rectangle ElementLossLife { get; set; }
+        public float LossLifePercent { get; set; }
+        public int scoreNumber { get; set; }
+        public Color Color { get; set; }
+        public int Nrockets { get; set; }
+        public float PercentScoreLeft { get; set; }
+        public Texture2D TextureScore { get; set; }
+        public Rectangle ElementScore { get; set; }
+        private int BaseLife { get; } = 800;
 
-    public Score(GraphicsDevice graphicsDevice, int lossLife, int nFrames): base(graphicsDevice)
-    {   
-        textureLossLife = new Texture2D(graphicsDevice, 1, 1);
-        textureLossLife.SetData<Color>(new Color[] { Color.White });
-        score = nFrames / 10;
-        percentScoreLeft = ((baseLife - (float)lossLife) / baseLife);
-        float sizeHeight = 675 * percentScoreLeft;
-        elementLossLife = new Rectangle(20, 20, 50, (int)sizeHeight);
+        public string GetScore()
+        {
+            return scoreNumber.ToString();
+        }
 
-        if (percentScoreLeft > 0.75f)
+        public Score(GraphicsDevice graphicsDevice, int lossLife, int nFrames) : base(graphicsDevice)
         {
-            color = Color.GreenYellow;
+            TextureLossLife = new Texture2D(graphicsDevice, 1, 1);
+            TextureLossLife.SetData<Color>(new Color[] { Color.White });
+            scoreNumber = nFrames / 10;
+            PercentScoreLeft = ((BaseLife - (float)lossLife) / BaseLife);
+            float sizeHeight = 675 * PercentScoreLeft;
+            ElementLossLife = new Rectangle(20, 20, 50, (int)sizeHeight);
 
-        }
-        else if (percentScoreLeft > 0.5f)
-        {
-            color = Color.LightYellow;
-        }
-        else if (percentScoreLeft > 0.25f)
-        {
-            color = Color.Orange;
-        }
-        else
-        {
-            color = Color.Red;
-        }
-        color = color * 0.5f;
+            if (PercentScoreLeft > 0.75f)
+            {
+                Color = Color.GreenYellow;
 
-        textureScore = new Texture2D(graphicsDevice, 1, 1);
-        textureScore.SetData<Color>(new Color[] { Color.White });
-        elementScore = new Rectangle(1050, 25, 125, 85);
+            }
+            else if (PercentScoreLeft > 0.5f)
+            {
+                Color = Color.LightYellow;
+            }
+            else if (PercentScoreLeft > 0.25f)
+            {
+                Color = Color.Orange;
+            }
+            else
+            {
+                Color = Color.Red;
+            }
+            Color = Color * 0.5f;
+
+            TextureScore = new Texture2D(graphicsDevice, 1, 1);
+            TextureScore.SetData<Color>(new Color[] { Color.White });
+            ElementScore = new Rectangle(1050, 25, 125, 85);
+        }
     }
 }

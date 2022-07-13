@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-public class SizeElement
+﻿namespace MoonFighter
 {
-    public int sizeX { get; set; }
-    public int sizeY { get; set; }
-
-    public SizeElement(int sizeX, int sizeY)
+    public class SizeElement
     {
-        this.sizeX = sizeX;
-        this.sizeY = sizeY;
+        public int SizeX { get; set; }
+        public int SizeY { get; set; }
+
+        public SizeElement(int sizeX, int sizeY)
+        {
+            SizeX = sizeX;
+            SizeY = sizeY;
+        }
     }
 }

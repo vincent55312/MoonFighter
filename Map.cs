@@ -1,19 +1,21 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
+﻿using Microsoft.Xna.Framework.Graphics;
 
-public class Map {
-    public int xPixel { get; set; }
-    public int yPixel { get; set; }
-    public int sizePixel { get; set; }
-    public int gravity { get; set; }
-    public Texture2D texture { get; set; }
-
-    public Map(int xPixel, int yPixel, int gravity, Texture2D texture)
+namespace MoonFighter
+{
+    public class Chunk
     {
-        this.yPixel = xPixel;
-        this.xPixel = yPixel;
-        this.gravity = gravity;
-        this.texture = texture;
+        public int Xpixels { get; set; }
+        public int Ypixels { get; set; }
+        public int SizePixel { get; set; }
+        public int Gravity { get; set; }
+        public Texture2D Texture { get; set; }
+
+        public Chunk(int xPixel, int yPixel, int gravity, Texture2D texture)
+        {
+            Ypixels = xPixel;
+            Xpixels = yPixel;
+            Gravity = gravity;
+            Texture = texture;
+        }
     }
 }
